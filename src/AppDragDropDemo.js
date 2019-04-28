@@ -5,7 +5,7 @@ export default class AppDragDropDemo extends Component {
     state = {
         tasks: [
             { name: "WT Project", category: "wip", bgcolor: "blue" },
-            { name: "Mensa essen", category: "wip", bgcolor: "green" },
+            { name: "WT2", category: "wip", bgcolor: "green" },
             { name: "Elektro U", category: "wip", bgcolor: "red" },
             { name: "Mathe V", category: "wip", bgcolor: "skyblue" },
             { name: "Sonstiges", category: "wip", bgcolor: "grey" }
