@@ -9,8 +9,7 @@
 }
 
 .wip {
-  position: absolute;
-  width: 150px;
+  width: 200px;
   height: 100vh;
   left: 0;
   top: 10;
@@ -33,10 +32,10 @@
 }
 
 .droppable {
-  position: absolute;
-  width: 1316px;
-    height: 40vh;
-
+ 
+  width: 1100px;
+  height: 40vh;
+float: right;
   right: 0;
   top: 10;
   background-color: #9E9E9E;

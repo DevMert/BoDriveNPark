@@ -70,16 +70,6 @@ export default class AppDragDropDemo extends Component {
 
                     </div>
                 </div>
-                <div id="wip" className="wip"
-                    onDragOver={(e) => this.onDragOver(e)}
-                    onDrop={(e) => { this.onDrop(e, "wip") }}>
-                    <div id='div'>
-                        <h3>+ <span>Component</span></h3>
-                        {tasks.wip}
-
-                    </div>
-                </div>
-
                 <table className="droppable"
                     onDragOver={(e) => this.onDragOver(e)}
                     onDrop={(e) => this.onDrop(e, "complete")}>
@@ -97,6 +87,17 @@ export default class AppDragDropDemo extends Component {
                     </tr>
 
                 </table>
+                <div id="wip" className="wip"
+                    onDragOver={(e) => this.onDragOver(e)}
+                    onDrop={(e) => { this.onDrop(e, "wip") }}>
+                    <div id='div'>
+                        <h3>+ <span>Component</span></h3>
+                        {tasks.wip}
+
+                    </div>
+                </div>
+
+             
 
 
 
