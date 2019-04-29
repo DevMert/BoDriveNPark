@@ -96,9 +96,16 @@ export default class AppDragDropDemo extends Component {
 
                     </div>
                 </div>
-
+                
              
-
+                <div id="container">
+   <div class="holder">
+     <div class="box" draggable="true">              </div>
+   </div>
+  
+   <div class="holder">
+   </div>
+</div>
 
 
             </div>

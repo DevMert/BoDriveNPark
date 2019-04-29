@@ -118,3 +118,43 @@ body {
   padding: 24px 24px 8px 22px;
   height:683px
 }
+
+
+.box {
+  height: 100px;
+  width: 100px;
+  background-color: black;
+  position: relative;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
+
+.held {
+  border: solid 10px black;
+  background-color: black;
+}
+
+.holder {
+  height: 110px;
+  width: 110px;
+  margin: 10px;
+  border: solid 5px black;
+  background-color: white;
+  display: inline-block;
+}
+
+.hovered {
+  border: dotted 5px black;
+}
+
+.invisible {
+  display: none;
+}
+
+#container {
+  margin: auto;
+  top: 100px;
+  width: 400px;
+  position: relative;
+}
