@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 export default class AppDragDropDemo extends Component {
+    
     state = {
         tasks: [
             { name: "WT Project", category: "wip", bgcolor: "blue" },
@@ -11,6 +12,10 @@ export default class AppDragDropDemo extends Component {
             { name: "Sonstiges", category: "wip", bgcolor: "grey" }
         ]
     }
+
+    
+
+
 
     onDragStart = (ev, id) => {
         console.log('dragstart:', id);
@@ -66,7 +71,7 @@ export default class AppDragDropDemo extends Component {
                         <a>Auslastung</a>
 
                         <a>Profile</a>
-                        <a >Logout</a>
+                        <a>Logout</a>
 
                     </div>
                 </div>
@@ -91,12 +96,12 @@ export default class AppDragDropDemo extends Component {
                     onDragOver={(e) => this.onDragOver(e)}
                     onDrop={(e) => { this.onDrop(e, "wip") }}>
                     <div id='div'>
-                        <h3>+ <span>Component</span></h3>
+                        <h3> + <span>Stunden hinzufügen +</span></h3>
                         {tasks.wip}
 
                     </div>
                 </div>
-                
+                 
              
                 <div id="container">
    <div class="holder">
