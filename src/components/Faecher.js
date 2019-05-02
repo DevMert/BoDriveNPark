@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
+import styled from 'styled-components'
+import Button from 'react-bootstrap/Button'
 
+const Test = styled.button `
+  color: red;
+`
 /**
  * Diese Funktion gibt die Componente mit einer Liste aller Fächern aus.
  * Dabei wird über alle Fächer anhand von props.faecher.map itteriert
@@ -64,6 +69,8 @@ class Faecher extends Component {
     })
   }
 
+  
+
   render() {
     return (
       <div>
@@ -74,9 +81,11 @@ class Faecher extends Component {
           value = {this.state.input}
           onChange={this.updateInput}
         />
-        <button onClick={this.handleFachHinzufuegen}> + </button>
+        <Test onClick={this.handleFachHinzufuegen}> + </Test>
         <FachListe 
           faecher = {this.state.faecher}
+
+          
         />
       </div>
     )
