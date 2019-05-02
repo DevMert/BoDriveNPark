@@ -1,5 +1,10 @@
 import React from 'react'
+import Faecher from './Faecher'
 
 export default function Dashboard() {
-  return <p>DASHBOARD</p>
+  return (
+    <div>
+      <Faecher />
+    </div>
+  )
 }
