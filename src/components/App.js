@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-
 import '../App.css';
+import NavBar from './NavBar';
 
 class App extends Component {
   
   render(){
     return (
       <div className="App">
-        <p>Hello World die wzeite</p>
-        <p>Und noch in test</p>
+          <NavBar />
       </div>
     );
   }
