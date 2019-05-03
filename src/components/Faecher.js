@@ -1,28 +1,37 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
-import Button from 'react-bootstrap/Button'
+import { GithubPicker } from 'react-color';
 
-const Test = styled.button `
-  color: red;
+
+const UnsortedList = styled.ul `
+  width: 20%;
+  min-height: 150px;
+  list-style: none; 
+  padding-left: 0;
+  border: 5px solid black;
+  
 `
+
+
 /**
- * Diese Funktion gibt die Componente mit einer Liste aller Fächern aus.
+ * Diese Funktion gibt die Componente mit einer Liste aller Fächer aus.
  * Dabei wird über alle Fächer anhand von props.faecher.map itteriert
  * und so jedes Fach, welches sich in dem State "faecher" der Klasse Faecher
  * befindet, in die Liste eingefuegt
  */
 function FachListe (props) {
+  
   return (
     <div>
-      <ul>
-      {props.faecher.map((fach) => 
-        <li key = {fach}>
-          <div className="Fachcontainer">
-            <span>{fach}</span>
-          </div>
-        </li>        
-      )}
-      </ul>
+      <UnsortedList>
+        {props.faecher.map((fach) => 
+          <li key = {fach}>
+            <div>
+              <span>{fach}</span>
+            </div>
+          </li>        
+        )}
+      </UnsortedList>
     </div>
   )
 }
@@ -33,6 +42,7 @@ class Faecher extends Component {
 
     this.state = {
       faecher: [],
+      farbe: '',
       input: '',
     }
 
@@ -74,18 +84,19 @@ class Faecher extends Component {
   render() {
     return (
       <div>
-        <p>Faecher wird gerendert</p>
+        {/*Componente zum auswählen der Farbe fürs Fach */}
+        <GithubPicker 
+          width = {100}
+        />
         <input 
           type = 'text'
           placeholder = 'Fach hinzufügen'
           value = {this.state.input}
           onChange={this.updateInput}
         />
-        <Test onClick={this.handleFachHinzufuegen}> + </Test>
+        <button onClick={this.handleFachHinzufuegen}> + </button>
         <FachListe 
-          faecher = {this.state.faecher}
-
-          
+          faecher = {this.state.faecher}        
         />
       </div>
     )
