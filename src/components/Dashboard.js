@@ -1,5 +1,5 @@
 import React from 'react'
-import Faecher from './Faecher'
+import Faecher from './FaecherContainer'
 
 export default function Dashboard() {
   return (
