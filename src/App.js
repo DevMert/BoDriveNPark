@@ -1,13 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Stundenplan from './Stundenplan';
-import Timetable from 'react-timetable-events';
+import Stundenplan from './timetable'
 
 function App() {
   return (
     <div className="App">
-        <Stundenplan/>
+      <Stundenplan/>
     </div>
   );
 }
