@@ -19,12 +19,9 @@ export default class oldPlans extends Component {
             </Popover>
           }
         >
-          <Button variant="success">
-            <span class="glyphicon glyphicon-search" aria-hidden="true">
-              Alte Pläne aufrufen
-            </span>
-          </Button>
+          <Button variant="secondary"> Test </Button>
         </OverlayTrigger>
+        <span className="sm-2"> 13.05 - 17.05 </span>
       </div>
     );
   }
