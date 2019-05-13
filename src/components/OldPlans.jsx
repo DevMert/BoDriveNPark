@@ -19,7 +19,7 @@ export default class oldPlans extends Component {
             </Popover>
           }
         >
-          <Button variant="secondary"> Test </Button>
+          <Button variant="secondary"> Ältere Pläne</Button>
         </OverlayTrigger>
         <span className="sm-2"> 13.05 - 17.05 </span>
       </div>
