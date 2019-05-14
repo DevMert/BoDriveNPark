@@ -6,9 +6,13 @@ import CurrentWeek from "./CurrentWeek";
 export default class PlanControl extends Component {
   render() {
     return (
-      <div>
-        <OldPlans />
-        <CurrentWeek />
+      <div className="MainTop">
+        <div className="oldPlans">
+          <OldPlans />
+        </div>
+        <div className="currentWeek">
+          <CurrentWeek />
+        </div>
       </div>
     );
   }

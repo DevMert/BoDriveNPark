@@ -4,7 +4,7 @@ import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 export default class OldPlans extends Component {
   render() {
     return (
-      <div style={{ align: "center", float: "left" }}>
+      <div>
         <OverlayTrigger
           trigger="click"
           placement="left"

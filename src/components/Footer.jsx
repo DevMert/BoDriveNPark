@@ -6,9 +6,13 @@ import SaveButton from "./SaveButton";
 class Footer extends Component {
   render() {
     return (
-      <div>
-        <Preference />
-        <SaveButton />
+      <div className="MainFooter">
+        <div className="PrefFoot">
+          <Preference />
+        </div>
+        <div className="SaveFoot">
+          <SaveButton />
+        </div>
       </div>
     );
   }
