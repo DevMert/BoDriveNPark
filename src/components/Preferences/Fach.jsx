@@ -6,12 +6,12 @@ class Fach extends React.Component {
   state = {
     displayColorPicker: false,
     color: {
-      r: "241",
-      g: "112",
-      b: "19",
+      r: "70",
+      g: "70",
+      b: "70",
       a: "1"
     },
-    text: "reserviert"
+    text: "Präferenz"
   };
 
   handleClick = () => {
@@ -33,7 +33,7 @@ class Fach extends React.Component {
       default: {
         color: {
           //width: '20%',
-          height: "30px",
+          height: "50px",
           borderRadius: "2px",
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${
             this.state.color.b
@@ -49,7 +49,9 @@ class Fach extends React.Component {
         },
         content: {
           textAlign: "center",
-          margin: "0"
+          margin: "0",
+          color: "white",
+          paddingTop: "10px"
         },
         popover: {
           position: "absolute",

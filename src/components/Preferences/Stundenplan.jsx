@@ -8,11 +8,21 @@ function Tabelle() {
       <thead>
         <tr>
           <th scope="col">Zeit</th>
-          <th scope="col">Montag</th>
-          <th scope="col">Dienstag</th>
-          <th scope="col">Mittwoch</th>
-          <th scope="col">Donnerstag</th>
-          <th scope="col">Freitag</th>
+          <th scope="col">
+            Montag<button style={{ float: "right" }}>-</button>
+          </th>
+          <th scope="col">
+            Dienstag<button style={{ float: "right" }}>-</button>
+          </th>
+          <th scope="col">
+            Mittwoch<button style={{ float: "right" }}>-</button>
+          </th>
+          <th scope="col">
+            Donnerstag<button style={{ float: "right" }}>-</button>
+          </th>
+          <th scope="col">
+            Freitag<button style={{ float: "right" }}>-</button>
+          </th>
         </tr>
       </thead>
       <tbody>
