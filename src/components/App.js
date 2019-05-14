@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "../App.css";
 import Header from "./NavBar";
-import Dashboard from "./Dashboard";
 import map from "./Map";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
-import PlanControl from "./PlanControl";
+import Main from "./Preferences/Main";
 import Footer from "./Footer";
 
 function App() {
@@ -12,9 +11,9 @@ function App() {
     <Router>
       <div>
         <Header />
-        <PlanControl />
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Main />
+        <Route exact path="/" component="" />
+        <Route path="/dashboard" component="" />
         <Route path="/map" component={map} />
         <div>
           <Footer />
