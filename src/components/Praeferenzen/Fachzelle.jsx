@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Fach from "./Fach";
 
-class DataCell extends Component {
+class Fachzelle extends Component {
   constructor(props) {
     super(props);
 
@@ -23,4 +23,4 @@ class DataCell extends Component {
   }
 }
 
-export default DataCell;
+export default Fachzelle;

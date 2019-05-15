@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-import PlanControl from "./PlanControl";
+import AltePlaene from "./AltePlaene";
 import Stundenplan from "./Stundenplan";
-import Footer from "../Footer";
+import Footer from "./Footer/Footer";
 
 export default class Main extends Component {
   state = {};
   render() {
     return (
       <div>
-        <PlanControl />
+        <AltePlaene />
         <Stundenplan />
         <Footer />
       </div>

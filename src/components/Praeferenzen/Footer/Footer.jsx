@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 
-import Preference from "./Preference";
-import SaveButton from "./SaveButton";
+import PraeferenzListe from "./PraeferenzListe";
+import SpeicherButton from "./SpeicherButton";
 
 class Footer extends Component {
   render() {
     return (
       <div className="MainFooter">
         <div className="PrefFoot">
-          <Preference />
+          <PraeferenzListe />
         </div>
         <div className="SaveFoot">
-          <SaveButton />
+          <SpeicherButton />
         </div>
       </div>
     );

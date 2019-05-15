@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Fach from "./Fach";
-import DataCell from "./DataCell";
+import Fachzelle from "./Fachzelle";
 
 function Tabelle() {
   return (
@@ -28,100 +28,100 @@ function Tabelle() {
       <tbody>
         <tr>
           <th scope="row">8-9</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">9-10</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">10-11</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
 
         <tr>
           <th scope="row">11-12</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">12-13</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">13-14</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">14-15</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">15-16</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">16-17</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">17-18</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">18-19</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
         <tr>
           <th scope="row">19-20</th>
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
-          <DataCell />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
+          <Fachzelle />
         </tr>
       </tbody>
     </table>
