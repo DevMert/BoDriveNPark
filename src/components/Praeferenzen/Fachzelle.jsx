@@ -19,6 +19,12 @@ class Fachzelle extends Component {
   };
 
 
+  handleSetPosition = (props) => {
+    this.setState(() => {
+
+    })
+  }
+
   render() {
     return (
       <td onClick={this.handleToggleFach} style={{ margin: "0", padding: "0" }}>

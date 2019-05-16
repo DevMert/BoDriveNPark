@@ -28,11 +28,11 @@ function Tabelle(props) {
       <tbody>
         <tr>
           <th scope="row">8-9</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
+          <Fachzelle tag='Mo' zeit='8'/>
+          <Fachzelle tag='Di' zeit='8'/>
+          <Fachzelle tag='Mi' zeit='8'/>
+          <Fachzelle tag='Do' zeit='8'/>
+          <Fachzelle tag='Fr' zeit='8'/>
         </tr>
         <tr>
           <th scope="row">9-10</th>
