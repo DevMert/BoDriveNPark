@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AltePlaene from "./AltePlaene";
+import KWSwitch from "./KWSwitch";
 import Stundenplan from "./Stundenplan";
 import Footer from "./Footer/Footer";
 
@@ -9,7 +9,7 @@ export default class Main extends Component {
   render() {
     return (
       <div>
-        <AltePlaene />
+        <KWSwitch />
         <Stundenplan />
         <Footer />
       </div>

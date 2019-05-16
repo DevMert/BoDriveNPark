@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 
 
-export default class PlanControl extends Component {
+class KWSwitch extends Component {
   render() {
     return (
       <div className="MainTop">
@@ -24,9 +24,11 @@ export default class PlanControl extends Component {
           </OverlayTrigger>
         </div>
         <div className="currentWeek">
-          <div> 13.05 - 17.05.2019</div>
+          <div> 13.05 - 19.05.2019</div>
         </div>
       </div>
     );
   }
 }
+
+export default KWSwitch;

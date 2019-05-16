@@ -11,7 +11,7 @@ function App() {
       <div>
         <Header />
         <Route exact path="/" component={Main} />
-        <Route path="/dashboard" component={Main} />
+        <Route path="/praeferenzplanung" component={Main} />
         <Route path="/map" component={Karte} />
         <div />
       </div>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Fach from "./Fach";
-import Fachzelle from "./Fachzelle";
+import Fachzelle from './Fachzelle'
 
-function Tabelle() {
+
+function Tabelle(props) {
   return (
     <table className="table table-bordered">
       <thead>
@@ -126,12 +126,20 @@ function Tabelle() {
       </tbody>
     </table>
   );
-}
+} 
 
 class Stundenplan extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isToggled: false
+    };
   }
+
+  handleToggleFach = () => {
+    this.setState({ isToggled: !this.state.isToggled });
+  };
 
   render() {
     return (

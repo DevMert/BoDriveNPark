@@ -6,7 +6,11 @@ class Fachzelle extends Component {
     super(props);
 
     this.state = {
-      isToggled: false
+      isToggled: false,
+      position: {
+        tag:'',
+        zeit:'',
+      }
     };
   }
 
@@ -14,10 +18,11 @@ class Fachzelle extends Component {
     this.setState({ isToggled: !this.state.isToggled });
   };
 
+
   render() {
     return (
       <td onClick={this.handleToggleFach} style={{ margin: "0", padding: "0" }}>
-        {this.state.isToggled ? <Fach /> : null}
+        {this.state.isToggled ? <Fach/> : null}
       </td>
     );
   }
