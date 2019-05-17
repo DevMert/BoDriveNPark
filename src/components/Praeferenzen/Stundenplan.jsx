@@ -1,6 +1,47 @@
 import React, { Component } from "react";
-import Fachzelle from './Fachzelle'
+import PraeferenzContainer from "./PraeferenzZelle";
+import { Dropdown } from "react-bootstrap";
 
+function TabellenZeile(props) {
+  return (
+    <tr>
+      <th scope="row">
+        {props.stunde}-{props.stunde + 1}
+      </th>
+      <PraeferenzContainer
+        onClick={() => props.handleToggleFlag("mo", props.stunde)}
+      />
+      <PraeferenzContainer
+        onClick={() => props.handleToggleFlag("di", props.stunde)}
+      />
+      <PraeferenzContainer
+        onClick={() => props.handleToggleFlag("mi", props.stunde)}
+      />
+      <PraeferenzContainer
+        onClick={() => props.handleToggleFlag("do", props.stunde)}
+      />
+      <PraeferenzContainer
+        onClick={() => props.handleToggleFlag("fr", props.stunde)}
+      />
+    </tr>
+  );
+}
+
+function ParkplatzDropdown(props) {
+  return (
+    <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Parkplatzpräferenz
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+}
 
 function Tabelle(props) {
   return (
@@ -8,143 +49,146 @@ function Tabelle(props) {
       <thead>
         <tr>
           <th scope="col">Zeit</th>
-          <th scope="col">
-            Montag<button style={{ float: "right" }}>-</button>
-          </th>
-          <th scope="col">
-            Dienstag<button style={{ float: "right" }}>-</button>
-          </th>
-          <th scope="col">
-            Mittwoch<button style={{ float: "right" }}>-</button>
-          </th>
-          <th scope="col">
-            Donnerstag<button style={{ float: "right" }}>-</button>
-          </th>
-          <th scope="col">
-            Freitag<button style={{ float: "right" }}>-</button>
-          </th>
+          <th scope="col">Montag</th>
+          <th scope="col">Dienstag</th>
+          <th scope="col">Mittwoch</th>
+          <th scope="col">Donnerstag</th>
+          <th scope="col">Freitag</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">8-9</th>
-          <Fachzelle tag='Mo' zeit='8'/>
-          <Fachzelle tag='Di' zeit='8'/>
-          <Fachzelle tag='Mi' zeit='8'/>
-          <Fachzelle tag='Do' zeit='8'/>
-          <Fachzelle tag='Fr' zeit='8'/>
-        </tr>
-        <tr>
-          <th scope="row">9-10</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">10-11</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={8} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={9} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={10} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={11} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={12} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={13} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={14} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={15} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={16} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={17} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={18} />
+        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={19} />
 
         <tr>
-          <th scope="row">11-12</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">12-13</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">13-14</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">14-15</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">15-16</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">16-17</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">17-18</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">18-19</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-        </tr>
-        <tr>
-          <th scope="row">19-20</th>
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
-          <Fachzelle />
+          <th scope="row">Parkplatz</th>
+          <td>
+            <ParkplatzDropdown />
+          </td>
+          <td>
+            <ParkplatzDropdown />
+          </td>
+          <td>
+            <ParkplatzDropdown />
+          </td>
+          <td>
+            <ParkplatzDropdown />
+          </td>
+          <td>
+            <ParkplatzDropdown />
+          </td>
         </tr>
       </tbody>
     </table>
   );
-} 
+}
 
 class Stundenplan extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isToggled: false
+      flags: [
+        { tag: "mo", stunde: 8, isToggled: false },
+        { tag: "mo", stunde: 9, isToggled: false },
+        { tag: "mo", stunde: 10, isToggled: false },
+        { tag: "mo", stunde: 11, isToggled: false },
+        { tag: "mo", stunde: 12, isToggled: false },
+        { tag: "mo", stunde: 13, isToggled: false },
+        { tag: "mo", stunde: 14, isToggled: false },
+        { tag: "mo", stunde: 15, isToggled: false },
+        { tag: "mo", stunde: 16, isToggled: false },
+        { tag: "mo", stunde: 17, isToggled: false },
+        { tag: "mo", stunde: 18, isToggled: false },
+        { tag: "mo", stunde: 19, isToggled: false },
+
+        { tag: "di", stunde: 8, isToggled: false },
+        { tag: "di", stunde: 9, isToggled: false },
+        { tag: "di", stunde: 10, isToggled: false },
+        { tag: "di", stunde: 11, isToggled: false },
+        { tag: "di", stunde: 12, isToggled: false },
+        { tag: "di", stunde: 13, isToggled: false },
+        { tag: "di", stunde: 14, isToggled: false },
+        { tag: "di", stunde: 15, isToggled: false },
+        { tag: "di", stunde: 16, isToggled: false },
+        { tag: "di", stunde: 17, isToggled: false },
+        { tag: "di", stunde: 18, isToggled: false },
+        { tag: "di", stunde: 19, isToggled: false },
+
+        { tag: "mi", stunde: 8, isToggled: false },
+        { tag: "mi", stunde: 9, isToggled: false },
+        { tag: "mi", stunde: 10, isToggled: false },
+        { tag: "mi", stunde: 11, isToggled: false },
+        { tag: "mi", stunde: 12, isToggled: false },
+        { tag: "mi", stunde: 13, isToggled: false },
+        { tag: "mi", stunde: 14, isToggled: false },
+        { tag: "mi", stunde: 15, isToggled: false },
+        { tag: "mi", stunde: 16, isToggled: false },
+        { tag: "mi", stunde: 17, isToggled: false },
+        { tag: "mi", stunde: 18, isToggled: false },
+        { tag: "mi", stunde: 19, isToggled: false },
+
+        { tag: "do", stunde: 8, isToggled: false },
+        { tag: "do", stunde: 9, isToggled: false },
+        { tag: "do", stunde: 10, isToggled: false },
+        { tag: "do", stunde: 11, isToggled: false },
+        { tag: "do", stunde: 12, isToggled: false },
+        { tag: "do", stunde: 13, isToggled: false },
+        { tag: "do", stunde: 14, isToggled: false },
+        { tag: "do", stunde: 15, isToggled: false },
+        { tag: "do", stunde: 16, isToggled: false },
+        { tag: "do", stunde: 17, isToggled: false },
+        { tag: "do", stunde: 18, isToggled: false },
+        { tag: "do", stunde: 19, isToggled: false },
+
+        { tag: "fr", stunde: 8, isToggled: false },
+        { tag: "fr", stunde: 9, isToggled: false },
+        { tag: "fr", stunde: 10, isToggled: false },
+        { tag: "fr", stunde: 11, isToggled: false },
+        { tag: "fr", stunde: 12, isToggled: false },
+        { tag: "fr", stunde: 13, isToggled: false },
+        { tag: "fr", stunde: 14, isToggled: false },
+        { tag: "fr", stunde: 15, isToggled: false },
+        { tag: "fr", stunde: 16, isToggled: false },
+        { tag: "fr", stunde: 17, isToggled: false },
+        { tag: "fr", stunde: 18, isToggled: false },
+        { tag: "fr", stunde: 19, isToggled: false }
+      ]
     };
+
+    this.handleToggleFlag = this.handleToggleFlag.bind(this);
   }
 
-  handleToggleFach = () => {
-    this.setState({ isToggled: !this.state.isToggled });
-  };
+  //
+  handleToggleFlag(t, s) {
+    this.setState(currentState => {
+      const modifiedFlag = currentState.flags
+        .filter(flag => flag.tag === t && flag.stunde === s)
+        .map(flag => (flag.isToggled = !flag.isToggled));
+
+      return {
+        modifiedFlag
+      };
+    });
+  }
 
   render() {
     return (
       <div>
-        <Tabelle />
+        <Tabelle
+          flags={this.state.flags}
+          handleToggleFlag={this.handleToggleFlag}
+        />
       </div>
     );
   }

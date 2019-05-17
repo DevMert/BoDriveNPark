@@ -2,7 +2,7 @@ import React from "react";
 import reactCSS from "reactcss";
 import { GithubPicker } from "react-color";
 
-class Fach extends React.Component {
+class PraeferenzContainer extends React.Component {
   state = {
     displayColorPicker: false,
     color: {
@@ -90,4 +90,4 @@ class Fach extends React.Component {
   }
 }
 
-export default Fach;
+export default PraeferenzContainer;

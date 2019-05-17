@@ -7,7 +7,7 @@ class PraeferenzListe extends Component {
     return (
       <div>
         <DropdownButton
-          drop="right"
+          drop="up"
           variant="secondary"
           title={` Präferenz auswählen `}
           id={`dropdown-button-drop-right`}
