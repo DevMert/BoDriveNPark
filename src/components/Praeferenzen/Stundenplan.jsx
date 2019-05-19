@@ -35,9 +35,15 @@ function ParkplatzDropdown(props) {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">Eingangsparkplätze</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Reihe 1</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Reihe 2</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">Reihe 3</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Reihe 4</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Reihe 5</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">Reihe 6</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Reihe 7</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Reihe 8</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
@@ -169,7 +175,6 @@ class Stundenplan extends Component {
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
   }
 
-  //
   handleToggleFlag(t, s) {
     this.setState(currentState => {
       const modifiedFlag = currentState.flags
