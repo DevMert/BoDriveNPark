@@ -31,19 +31,23 @@ function ParkplatzDropdown(props) {
   return (
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Parkplatzpräferenz
+        {props.parkPrefs.pref}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Eingangsparkplätze</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Reihe 1</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Reihe 2</Dropdown.Item>
-        <Dropdown.Item href="#/action-1">Reihe 3</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Reihe 4</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Reihe 5</Dropdown.Item>
-        <Dropdown.Item href="#/action-1">Reihe 6</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Reihe 7</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Reihe 8</Dropdown.Item>
+        <Dropdown.Item
+          onSelect={() =>
+            props.handleSelectParkPref(
+              props.parkPrefs.tag,
+              "Eingangsparkplätze"
+            )
+          }
+        >
+          Eingangsparkplätze
+        </Dropdown.Item>
+        <Dropdown.Item>RUB-Parkplätze</Dropdown.Item>
+        <Dropdown.Item>Hauptparkplatz</Dropdown.Item>
+        <Dropdown.Item />
       </Dropdown.Menu>
     </Dropdown>
   );
@@ -79,19 +83,34 @@ function Tabelle(props) {
         <tr>
           <th scope="row">Parkplatz</th>
           <td>
-            <ParkplatzDropdown />
+            <ParkplatzDropdown
+              parkPrefs={props.parkPrefs[0]}
+              handleSelectParkPref={props.handleSelectParkPref}
+            />
           </td>
           <td>
-            <ParkplatzDropdown />
+            <ParkplatzDropdown
+              parkPrefs={props.parkPrefs[1]}
+              handleSelectParkPref={props.handleSelectParkPref}
+            />
           </td>
           <td>
-            <ParkplatzDropdown />
+            <ParkplatzDropdown
+              parkPrefs={props.parkPrefs[2]}
+              handleSelectParkPref={props.handleSelectParkPref}
+            />
           </td>
           <td>
-            <ParkplatzDropdown />
+            <ParkplatzDropdown
+              parkPrefs={props.parkPrefs[3]}
+              handleSelectParkPref={props.handleSelectParkPref}
+            />
           </td>
           <td>
-            <ParkplatzDropdown />
+            <ParkplatzDropdown
+              parkPrefs={props.parkPrefs[4]}
+              handleSelectParkPref={props.handleSelectParkPref}
+            />
           </td>
         </tr>
       </tbody>
@@ -169,10 +188,19 @@ class Stundenplan extends Component {
         { tag: "fr", stunde: 17, isToggled: false },
         { tag: "fr", stunde: 18, isToggled: false },
         { tag: "fr", stunde: 19, isToggled: false }
+      ],
+
+      parkPrefs: [
+        { tag: "mo", pref: "Parkplatzpräferenz" },
+        { tag: "di", pref: "Parkplatzpräferenz" },
+        { tag: "mi", pref: "Parkplatzpräferenz" },
+        { tag: "do", pref: "Parkplatzpräferenz" },
+        { tag: "fr", pref: "Parkplatzpräferenz" }
       ]
     };
 
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
+    this.handleSelectParkPref = this.handleSelectParkPref.bind(this);
   }
 
   handleToggleFlag(t, s) {
@@ -187,12 +215,26 @@ class Stundenplan extends Component {
     });
   }
 
+  handleSelectParkPref(t, p) {
+    this.setState(currentState => {
+      const modifiedPref = currentState.parkPrefs
+        .filter(currPref => currPref.tag === t)
+        .map(currPref => (currPref.pref = p));
+
+      return {
+        modifiedPref
+      };
+    });
+  }
+
   render() {
     return (
       <div>
         <Tabelle
           flags={this.state.flags}
           handleToggleFlag={this.handleToggleFlag}
+          parkPrefs={this.state.parkPrefs}
+          handleSelectParkPref={this.handleSelectParkPref}
         />
       </div>
     );
