@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PraeferenzContainer from "./PraeferenzZelle";
+import PraeferenzZelle from "./PraeferenzZelle";
 import { Dropdown } from "react-bootstrap";
 
 function TabellenZeile(props) {
@@ -8,19 +8,19 @@ function TabellenZeile(props) {
       <th scope="row">
         {props.stunde}-{props.stunde + 1}
       </th>
-      <PraeferenzContainer
+      <PraeferenzZelle
         onClick={() => props.handleToggleFlag("mo", props.stunde)}
       />
-      <PraeferenzContainer
+      <PraeferenzZelle
         onClick={() => props.handleToggleFlag("di", props.stunde)}
       />
-      <PraeferenzContainer
+      <PraeferenzZelle
         onClick={() => props.handleToggleFlag("mi", props.stunde)}
       />
-      <PraeferenzContainer
+      <PraeferenzZelle
         onClick={() => props.handleToggleFlag("do", props.stunde)}
       />
-      <PraeferenzContainer
+      <PraeferenzZelle
         onClick={() => props.handleToggleFlag("fr", props.stunde)}
       />
     </tr>
