@@ -10,18 +10,23 @@ function TabellenZeile(props) {
       </th>
       <PraeferenzZelle
         onClick={() => props.handleToggleFlag("mo", props.stunde)}
+        flagsAllowed={props.flagsAllowed}
       />
       <PraeferenzZelle
         onClick={() => props.handleToggleFlag("di", props.stunde)}
+        flagsAllowed={props.flagsAllowed}
       />
       <PraeferenzZelle
         onClick={() => props.handleToggleFlag("mi", props.stunde)}
+        flagsAllowed={props.flagsAllowed}
       />
       <PraeferenzZelle
         onClick={() => props.handleToggleFlag("do", props.stunde)}
+        flagsAllowed={props.flagsAllowed}
       />
       <PraeferenzZelle
         onClick={() => props.handleToggleFlag("fr", props.stunde)}
+        flagsAllowed={props.flagsAllowed}
       />
     </tr>
   );
@@ -30,24 +35,39 @@ function TabellenZeile(props) {
 function ParkplatzDropdown(props) {
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
         {props.parkPrefs.pref}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         <Dropdown.Item
           onSelect={() =>
-            props.handleSelectParkPref(
-              props.parkPrefs.tag,
-              "Eingangsparkplätze"
-            )
+            props.handleSelectParkPref(props.parkPrefs.tag, "Eingangsparkplatz")
           }
         >
-          Eingangsparkplätze
+          Eingangsparkplatz
         </Dropdown.Item>
-        <Dropdown.Item>RUB-Parkplätze</Dropdown.Item>
-        <Dropdown.Item>Hauptparkplatz</Dropdown.Item>
-        <Dropdown.Item />
+        <Dropdown.Item
+          onSelect={() =>
+            props.handleSelectParkPref(props.parkPrefs.tag, "RUB-Parkplatz")
+          }
+        >
+          RUB-Parkplatz
+        </Dropdown.Item>
+        <Dropdown.Item
+          onSelect={() =>
+            props.handleSelectParkPref(props.parkPrefs.tag, "Hauptparkplatz")
+          }
+        >
+          Hauptparkplatz
+        </Dropdown.Item>
+        <Dropdown.Item
+          onSelect={() =>
+            props.handleSelectParkPref(props.parkPrefs.tag, "E-Parkplatz")
+          }
+        >
+          E-Parkplatz
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
@@ -67,18 +87,66 @@ function Tabelle(props) {
         </tr>
       </thead>
       <tbody>
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={8} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={9} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={10} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={11} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={12} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={13} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={14} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={15} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={16} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={17} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={18} />
-        <TabellenZeile handleToggleFlag={props.handleToggleFlag} stunde={19} />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={8}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={9}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={10}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={11}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={12}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={13}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={14}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={15}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={16}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={17}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={18}
+          flagsAllowed={props.flagsAllowed}
+        />
+        <TabellenZeile
+          handleToggleFlag={props.handleToggleFlag}
+          stunde={19}
+          flagsAllowed={props.flagsAllowed}
+        />
 
         <tr>
           <th scope="row">Parkplatz</th>
@@ -196,7 +264,9 @@ class Stundenplan extends Component {
         { tag: "mi", pref: "Parkplatzpräferenz" },
         { tag: "do", pref: "Parkplatzpräferenz" },
         { tag: "fr", pref: "Parkplatzpräferenz" }
-      ]
+      ],
+
+      flagsAllowed: 40
     };
 
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
@@ -207,7 +277,12 @@ class Stundenplan extends Component {
     this.setState(currentState => {
       const modifiedFlag = currentState.flags
         .filter(flag => flag.tag === t && flag.stunde === s)
-        .map(flag => (flag.isToggled = !flag.isToggled));
+        .map(flag => {
+          flag.isToggled
+            ? (currentState.flagsAllowed += 1)
+            : (currentState.flagsAllowed -= 1);
+          flag.isToggled = !flag.isToggled;
+        });
 
       return {
         modifiedFlag
@@ -235,6 +310,7 @@ class Stundenplan extends Component {
           handleToggleFlag={this.handleToggleFlag}
           parkPrefs={this.state.parkPrefs}
           handleSelectParkPref={this.handleSelectParkPref}
+          flagsAllowed={this.state.flagsAllowed}
         />
       </div>
     );
