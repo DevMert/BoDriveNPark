@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import Stundenplan from './Stundenplan'
+import ReservierungsZelle from './Reservierungszelle'
+
+function ReservierteZeit(props){
+    
+}
 
 function TabellenZeile(props) {
     return (
@@ -7,6 +12,11 @@ function TabellenZeile(props) {
         <th scope="row">
           {props.stunde}-{props.stunde + 1}
         </th>
+        <ReservierungsZelle></ReservierungsZelle>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     )
 }
@@ -25,7 +35,7 @@ function Tabelle(props) {
           </tr>
         </thead>
         <tbody>
-            <TabellenZeile stunde={8}/>
+            <TabellenZeile stunde={8}></TabellenZeile>
             <TabellenZeile stunde={9}/>
             <TabellenZeile stunde={10}/>
             <TabellenZeile stunde={11}/>
@@ -37,12 +47,8 @@ function Tabelle(props) {
             <TabellenZeile stunde={17}/>
             <TabellenZeile stunde={18}/>
             <TabellenZeile stunde={19}/>
+            
         </tbody>
-        <tr><td>sdfsdfs</td><td>sdsgsgsg</td></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
     </table>
   );
 }
