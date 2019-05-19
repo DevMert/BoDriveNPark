@@ -1,0 +1,51 @@
+.app {
+  text-align: center;
+}
+.Navbar li {
+  display: inline;
+  margin-right: 100px;
+}
+
+.MainTop {
+  position: relative;
+  height: 40px;
+  width: 280px;
+  left: 50%;
+  margin-left: -140px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.oldPlans {
+  float: left;
+  margin-left: 10px;
+  height: 40px;
+  width: 115px;
+}
+
+.currentWeek {
+  font-weight: bold;
+  margin-top: 10px;
+  float: right;
+  height: 30px;
+  width: 150px;
+}
+
+.PrefFoot {
+  float: left;
+  height: 40px;
+  width: 115px;
+  margin-left: 10px;
+}
+
+.SaveFoot {
+  float: right;
+  height: 40px;
+  width: 115px;
+
+  margin-right: 43%;
+}
+
+.MainFooter {
+  height: 50px;
+}
