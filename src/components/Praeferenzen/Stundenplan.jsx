@@ -73,117 +73,70 @@ function ParkplatzDropdown(props) {
   );
 }
 
-function Tabelle(props) {
-  return (
-    <table className="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Zeit</th>
-          <th scope="col">Montag</th>
-          <th scope="col">Dienstag</th>
-          <th scope="col">Mittwoch</th>
-          <th scope="col">Donnerstag</th>
-          <th scope="col">Freitag</th>
-        </tr>
-      </thead>
-      <tbody>
+class Tabelle extends Component {
+  render() {
+    const tabellenzeilen = [];
+    for (var i = 8; i < 19; i++) {
+      tabellenzeilen.push(
         <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={8}
-          flagsAllowed={props.flagsAllowed}
+          handleToggleFlag={this.props.handleToggleFlag}
+          stunde={i}
+          flagsAllowed={this.props.flagsAllowed}
         />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={9}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={10}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={11}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={12}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={13}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={14}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={15}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={16}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={17}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={18}
-          flagsAllowed={props.flagsAllowed}
-        />
-        <TabellenZeile
-          handleToggleFlag={props.handleToggleFlag}
-          stunde={19}
-          flagsAllowed={props.flagsAllowed}
-        />
+      );
+    }
+    return (
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Zeit</th>
+            <th scope="col">Montag</th>
+            <th scope="col">Dienstag</th>
+            <th scope="col">Mittwoch</th>
+            <th scope="col">Donnerstag</th>
+            <th scope="col">Freitag</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tabellenzeilen}
 
-        <tr>
-          <th scope="row">Parkplatz</th>
-          <td>
-            <ParkplatzDropdown
-              parkPrefs={props.parkPrefs[0]}
-              handleSelectParkPref={props.handleSelectParkPref}
-            />
-          </td>
-          <td>
-            <ParkplatzDropdown
-              parkPrefs={props.parkPrefs[1]}
-              handleSelectParkPref={props.handleSelectParkPref}
-            />
-          </td>
-          <td>
-            <ParkplatzDropdown
-              parkPrefs={props.parkPrefs[2]}
-              handleSelectParkPref={props.handleSelectParkPref}
-            />
-          </td>
-          <td>
-            <ParkplatzDropdown
-              parkPrefs={props.parkPrefs[3]}
-              handleSelectParkPref={props.handleSelectParkPref}
-            />
-          </td>
-          <td>
-            <ParkplatzDropdown
-              parkPrefs={props.parkPrefs[4]}
-              handleSelectParkPref={props.handleSelectParkPref}
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
+          <tr>
+            <th scope="row">Parkplatz</th>
+            <td>
+              <ParkplatzDropdown
+                parkPrefs={this.props.parkPrefs[0]}
+                handleSelectParkPref={this.props.handleSelectParkPref}
+              />
+            </td>
+            <td>
+              <ParkplatzDropdown
+                parkPrefs={this.props.parkPrefs[1]}
+                handleSelectParkPref={this.props.handleSelectParkPref}
+              />
+            </td>
+            <td>
+              <ParkplatzDropdown
+                parkPrefs={this.props.parkPrefs[2]}
+                handleSelectParkPref={this.props.handleSelectParkPref}
+              />
+            </td>
+            <td>
+              <ParkplatzDropdown
+                parkPrefs={this.props.parkPrefs[3]}
+                handleSelectParkPref={this.props.handleSelectParkPref}
+              />
+            </td>
+            <td>
+              <ParkplatzDropdown
+                parkPrefs={this.props.parkPrefs[4]}
+                handleSelectParkPref={this.props.handleSelectParkPref}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
 }
 
 class Stundenplan extends Component {
