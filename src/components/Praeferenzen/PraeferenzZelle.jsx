@@ -13,11 +13,11 @@ class PraeferenzZelle extends Component {
   handleToggleContainer = () => {
     if (
       this.props.flagsAllowed > 0 ||
-      (this.props.flagsAllowed == 0 && this.state.isToggled == true)
+      (this.props.flagsAllowed === 0 && this.state.isToggled === true)
     ) {
       this.setState({ isToggled: !this.state.isToggled });
       this.props.onClick();
-    } else if (this.props.flagsAllowed == 0 && this.state.isToggled == false)
+    } else if (this.props.flagsAllowed === 0 && this.state.isToggled === false)
       return;
   };
 

@@ -272,7 +272,16 @@ class Stundenplan extends Component {
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
     this.handleSelectParkPref = this.handleSelectParkPref.bind(this);
   }
-
+  /**
+   * Diese Funktion dient zum an und austoggeln der
+   * Flags im state dieser Klasse
+   *
+   * @param {string} t
+   * Der Tag in dem Die Flag getoggled werden soll
+   * @param {integer} s
+   * Die Stunde in der die Flag getoggled werden soll
+   * @public
+   */
   handleToggleFlag(t, s) {
     this.setState(currentState => {
       const modifiedFlag = currentState.flags
@@ -290,6 +299,14 @@ class Stundenplan extends Component {
     });
   }
 
+  /**
+   * Diese Funktion dient zum Wählen der Parkplatzpräferenz,
+   * welche im state dieser Klasse gespeichert wird
+   * @param {string} t
+   * Der Tag für den die Präferenz gewählt werden soll.
+   * @param {string} p
+   *
+   */
   handleSelectParkPref(t, p) {
     this.setState(currentState => {
       const modifiedPref = currentState.parkPrefs
@@ -305,6 +322,7 @@ class Stundenplan extends Component {
   render() {
     return (
       <div>
+        <p>Erlaubte Reservierungen: {this.state.flagsAllowed}</p>
         <Tabelle
           flags={this.state.flags}
           handleToggleFlag={this.handleToggleFlag}
