@@ -32,57 +32,82 @@ function TabellenZeile(props) {
   );
 }
 
-function ParkplatzDropdown(props) {
-  return (
-    <Dropdown>
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-        {props.parkPrefs.pref}
-      </Dropdown.Toggle>
+class ParkplatzDropdown extends Component {
+  render() {
+    return (
+      <Dropdown>
+        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          {this.props.parkPrefs.pref}
+        </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item
-          onSelect={() =>
-            props.handleSelectParkPref(props.parkPrefs.tag, "Eingangsparkplatz")
-          }
-        >
-          Eingangsparkplatz
-        </Dropdown.Item>
-        <Dropdown.Item
-          onSelect={() =>
-            props.handleSelectParkPref(props.parkPrefs.tag, "RUB-Parkplatz")
-          }
-        >
-          RUB-Parkplatz
-        </Dropdown.Item>
-        <Dropdown.Item
-          onSelect={() =>
-            props.handleSelectParkPref(props.parkPrefs.tag, "Hauptparkplatz")
-          }
-        >
-          Hauptparkplatz
-        </Dropdown.Item>
-        <Dropdown.Item
-          onSelect={() =>
-            props.handleSelectParkPref(props.parkPrefs.tag, "E-Parkplatz")
-          }
-        >
-          E-Parkplatz
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  );
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onSelect={() =>
+              this.props.handleSelectParkPref(
+                this.props.parkPrefs.tag,
+                "Eingangsparkplatz"
+              )
+            }
+          >
+            Eingangsparkplatz
+          </Dropdown.Item>
+          <Dropdown.Item
+            onSelect={() =>
+              this.props.handleSelectParkPref(
+                this.props.parkPrefs.tag,
+                "RUB-Parkplatz"
+              )
+            }
+          >
+            RUB-Parkplatz
+          </Dropdown.Item>
+          <Dropdown.Item
+            onSelect={() =>
+              this.props.handleSelectParkPref(
+                this.props.parkPrefs.tag,
+                "Hauptparkplatz"
+              )
+            }
+          >
+            Hauptparkplatz
+          </Dropdown.Item>
+          <Dropdown.Item
+            onSelect={() =>
+              this.props.handleSelectParkPref(
+                this.props.parkPrefs.tag,
+                "E-Parkplatz"
+              )
+            }
+          >
+            E-Parkplatz
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
 }
 
 class Tabelle extends Component {
   render() {
     const tabellenzeilen = [];
-    for (var i = 8; i < 19; i++) {
+    const dropdowns = [];
+    for (var i = 8; i <= 19; i++) {
       tabellenzeilen.push(
         <TabellenZeile
           handleToggleFlag={this.props.handleToggleFlag}
           stunde={i}
           flagsAllowed={this.props.flagsAllowed}
         />
+      );
+    }
+    for (var i = 0; i <= 4; i++) {
+      dropdowns.push(
+        <td>
+          <ParkplatzDropdown
+            parkPrefs={this.props.parkPrefs[i]}
+            handleSelectParkPref={this.props.handleSelectParkPref}
+          />
+        </td>
       );
     }
     return (
@@ -99,39 +124,9 @@ class Tabelle extends Component {
         </thead>
         <tbody>
           {tabellenzeilen}
-
           <tr>
             <th scope="row">Parkplatz</th>
-            <td>
-              <ParkplatzDropdown
-                parkPrefs={this.props.parkPrefs[0]}
-                handleSelectParkPref={this.props.handleSelectParkPref}
-              />
-            </td>
-            <td>
-              <ParkplatzDropdown
-                parkPrefs={this.props.parkPrefs[1]}
-                handleSelectParkPref={this.props.handleSelectParkPref}
-              />
-            </td>
-            <td>
-              <ParkplatzDropdown
-                parkPrefs={this.props.parkPrefs[2]}
-                handleSelectParkPref={this.props.handleSelectParkPref}
-              />
-            </td>
-            <td>
-              <ParkplatzDropdown
-                parkPrefs={this.props.parkPrefs[3]}
-                handleSelectParkPref={this.props.handleSelectParkPref}
-              />
-            </td>
-            <td>
-              <ParkplatzDropdown
-                parkPrefs={this.props.parkPrefs[4]}
-                handleSelectParkPref={this.props.handleSelectParkPref}
-              />
-            </td>
+            {dropdowns}
           </tr>
         </tbody>
       </table>
@@ -273,9 +268,14 @@ class Stundenplan extends Component {
   }
 
   render() {
+    var divstyle = {
+      align: "center"
+    };
     return (
       <div>
-        <p>Erlaubte Reservierungen: {this.state.flagsAllowed}</p>
+        <div align="center">
+          <p>Erlaubte Reservierungen: {this.state.flagsAllowed}</p>
+        </div>
         <Tabelle
           flags={this.state.flags}
           handleToggleFlag={this.handleToggleFlag}
