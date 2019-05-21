@@ -268,9 +268,6 @@ class Stundenplan extends Component {
   }
 
   render() {
-    var divstyle = {
-      align: "center"
-    };
     return (
       <div>
         <div align="center">
