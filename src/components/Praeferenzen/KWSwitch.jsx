@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 
+import CurrentWeek from "./CurrentWeek";
 
 class KWSwitch extends Component {
   render() {
@@ -24,7 +25,9 @@ class KWSwitch extends Component {
           </OverlayTrigger>
         </div>
         <div className="currentWeek">
-          <div> 13.05 - 19.05.2019</div>
+          <div>
+            <CurrentWeek />
+          </div>
         </div>
       </div>
     );
