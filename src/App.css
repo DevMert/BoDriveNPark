@@ -8,8 +8,8 @@
 
 .MainTop {
   position: relative;
-  height: 40px;
-  width: 280px;
+  height: 70px;
+  width: 400px;
   left: 50%;
   margin-left: -140px;
   margin-top: 10px;
@@ -19,16 +19,18 @@
 .oldPlans {
   float: left;
   margin-left: 10px;
+  margin-top: 10px;
   height: 40px;
   width: 115px;
 }
 
 .currentWeek {
-  font-weight: bold;
-  margin-top: 10px;
   float: right;
-  height: 30px;
-  width: 150px;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 20px;
+  height: 60px;
+  width: 205px;
 }
 
 .PrefFoot {
