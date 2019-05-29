@@ -1,53 +1,55 @@
-import React, { Component } from 'react';
-import reactCSS from 'reactcss';
-import { Dropdown } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+//Designed by Daniel tura
+
+import React, { Component } from "react";
+import reactCSS from "reactcss";
+import { Dropdown } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 class PraeferenzZelle extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isToggled: false,
+      isToggled: false
     };
   }
 
   handleToggleContainer = () => {
-    if (
-      this.props.flagsAllowed > 0 ||
-      (this.props.flagsAllowed === 0 && this.state.isToggled === true)
-    ) {
-      this.setState({ isToggled: !this.state.isToggled });
-      this.props.onClick();
-    } else if (this.props.flagsAllowed === 0 && this.state.isToggled === false) return;
+    const { flagsAllowed, onClick } = this.props;
+    const { isToggled } = this.state;
+
+    if (flagsAllowed > 0 || (flagsAllowed === 0 && isToggled === true)) {
+      this.setState({ isToggled: !isToggled });
+      onClick();
+    } else if (flagsAllowed === 0 && isToggled === false) return;
   };
 
   render() {
     const styles = reactCSS({
       default: {
         noFlags: {
-          marginTop: '8px',
-          color: `rgba(70,70,70,0.3)`,
+          marginTop: "8px",
+          color: `rgba(70,70,70,0.3)`
         },
         container: {
-          height: '48px',
-          borderRadius: '2px',
-          background: `rgba(70,70,70,1)`,
+          height: "48px",
+          borderRadius: "2px",
+          background: `rgba(70,70,70,1)`
         },
         text: {
-          textAlign: 'center',
-          margin: '0',
-          color: 'white',
-          paddingTop: '10px',
-          cursor: 'default',
-        },
-      },
+          textAlign: "center",
+          margin: "0",
+          color: "white",
+          paddingTop: "10px",
+          cursor: "default"
+        }
+      }
     });
 
     if (this.props.flagsAllowed === 40) {
       return (
-        <td onClick={this.handleToggleContainer} style={{ margin: '0', padding: '0' }}>
-          <div align='center'>
+        <td onClick={this.handleToggleContainer} style={{ margin: "0", padding: "0" }}>
+          <div align="center">
             <p style={styles.noFlags}>Hier klicken</p>
           </div>
         </td>
@@ -55,7 +57,7 @@ class PraeferenzZelle extends Component {
     }
 
     return (
-      <td onClick={this.handleToggleContainer} style={{ margin: '0', padding: '0' }}>
+      <td onClick={this.handleToggleContainer} style={{ margin: "0", padding: "0" }}>
         <div>
           {this.state.isToggled ? (
             <div style={styles.container}>
@@ -70,30 +72,32 @@ class PraeferenzZelle extends Component {
 
 class TabellenZeile extends Component {
   render() {
+    const { stunde, flagsAllowed, handleToggleFlag } = this.props;
+
     return (
       <tr>
-        <th scope='row'>
-          {this.props.stunde}-{this.props.stunde + 1}
+        <th scope="row">
+          {stunde}-{stunde + 1}
         </th>
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag('mo', this.props.stunde)}
-          flagsAllowed={this.props.flagsAllowed}
+          onClick={() => handleToggleFlag("mo", stunde)}
+          flagsAllowed={flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag('di', this.props.stunde)}
-          flagsAllowed={this.props.flagsAllowed}
+          onClick={() => handleToggleFlag("di", stunde)}
+          flagsAllowed={flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag('mi', this.props.stunde)}
-          flagsAllowed={this.props.flagsAllowed}
+          onClick={() => handleToggleFlag("mi", stunde)}
+          flagsAllowed={flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag('do', this.props.stunde)}
-          flagsAllowed={this.props.flagsAllowed}
+          onClick={() => handleToggleFlag("do", stunde)}
+          flagsAllowed={flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag('fr', this.props.stunde)}
-          flagsAllowed={this.props.flagsAllowed}
+          onClick={() => handleToggleFlag("fr", stunde)}
+          flagsAllowed={flagsAllowed}
         />
       </tr>
     );
@@ -102,36 +106,32 @@ class TabellenZeile extends Component {
 
 class ParkplatzDropdown extends Component {
   render() {
+    const {
+      handleSelectParkPref,
+      parkPrefs: { tag, pref }
+    } = this.props;
+
     return (
       <Dropdown>
-        <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
-          {this.props.parkPrefs.pref}
+        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          {pref}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item
-            onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'Eingangsparkplatz')
-            }>
+          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "Eingangsparkplatz")}>
             Eingangsparkplatz
           </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'RUB-Parkplatz')
-            }>
+          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "RUB-Parkplatz")}>
             RUB-Parkplatz
           </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'Hauptparkplatz')
-            }>
+          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "Hauptparkplatz")}>
             Hauptparkplatz
           </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'E-Parkplatz')
-            }>
+          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "E-Parkplatz")}>
             E-Parkplatz
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "Alle HS-parkplätze")}>
+            <b>Alle HS-parkplätze</b>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -146,21 +146,21 @@ class Tabelle extends Component {
     const thead = (
       <thead>
         <tr>
-          <th scope='col'>Zeit</th>
-          <th scope='col'>
-            <div align='center'>Montag</div>
+          <th scope="col">Zeit</th>
+          <th scope="col">
+            <div align="center">Montag</div>
           </th>
-          <th scope='col'>
-            <div align='center'>Dienstag</div>
+          <th scope="col">
+            <div align="center">Dienstag</div>
           </th>
-          <th scope='col'>
-            <div align='center'>Mittwoch</div>
+          <th scope="col">
+            <div align="center">Mittwoch</div>
           </th>
-          <th scope='col'>
-            <div align='center'>Donnerstag</div>
+          <th scope="col">
+            <div align="center">Donnerstag</div>
           </th>
-          <th scope='col'>
-            <div align='center'>Freitag</div>
+          <th scope="col">
+            <div align="center">Freitag</div>
           </th>
         </tr>
       </thead>
@@ -170,7 +170,7 @@ class Tabelle extends Component {
       <tbody>
         {stundenZeilen}
         <tr>
-          <th scope='row'>Parkplatz</th>
+          <th scope="row">Parkplatz</th>
           {parkplatzDropdowns}
         </tr>
       </tbody>
@@ -183,7 +183,7 @@ class Tabelle extends Component {
           handleToggleFlag={this.props.handleToggleFlag}
           stunde={i}
           flagsAllowed={this.props.flagsAllowed}
-        />,
+        />
       );
     }
 
@@ -194,12 +194,12 @@ class Tabelle extends Component {
             parkPrefs={this.props.parkPrefs[j]}
             handleSelectParkPref={this.props.handleSelectParkPref}
           />
-        </td>,
+        </td>
       );
     }
 
     return (
-      <table className='table table-bordered'>
+      <table className="table table-bordered">
         {thead}
         {tbody}
       </table>
@@ -213,85 +213,85 @@ class Stundenplan extends Component {
 
     this.state = {
       flags: [
-        { tag: 'mo', stunde: 8, isToggled: false },
-        { tag: 'mo', stunde: 9, isToggled: false },
-        { tag: 'mo', stunde: 10, isToggled: false },
-        { tag: 'mo', stunde: 11, isToggled: false },
-        { tag: 'mo', stunde: 12, isToggled: false },
-        { tag: 'mo', stunde: 13, isToggled: false },
-        { tag: 'mo', stunde: 14, isToggled: false },
-        { tag: 'mo', stunde: 15, isToggled: false },
-        { tag: 'mo', stunde: 16, isToggled: false },
-        { tag: 'mo', stunde: 17, isToggled: false },
-        { tag: 'mo', stunde: 18, isToggled: false },
-        { tag: 'mo', stunde: 19, isToggled: false },
+        { tag: "mo", stunde: 8, isToggled: false },
+        { tag: "mo", stunde: 9, isToggled: false },
+        { tag: "mo", stunde: 10, isToggled: false },
+        { tag: "mo", stunde: 11, isToggled: false },
+        { tag: "mo", stunde: 12, isToggled: false },
+        { tag: "mo", stunde: 13, isToggled: false },
+        { tag: "mo", stunde: 14, isToggled: false },
+        { tag: "mo", stunde: 15, isToggled: false },
+        { tag: "mo", stunde: 16, isToggled: false },
+        { tag: "mo", stunde: 17, isToggled: false },
+        { tag: "mo", stunde: 18, isToggled: false },
+        { tag: "mo", stunde: 19, isToggled: false },
 
-        { tag: 'di', stunde: 8, isToggled: false },
-        { tag: 'di', stunde: 9, isToggled: false },
-        { tag: 'di', stunde: 10, isToggled: false },
-        { tag: 'di', stunde: 11, isToggled: false },
-        { tag: 'di', stunde: 12, isToggled: false },
-        { tag: 'di', stunde: 13, isToggled: false },
-        { tag: 'di', stunde: 14, isToggled: false },
-        { tag: 'di', stunde: 15, isToggled: false },
-        { tag: 'di', stunde: 16, isToggled: false },
-        { tag: 'di', stunde: 17, isToggled: false },
-        { tag: 'di', stunde: 18, isToggled: false },
-        { tag: 'di', stunde: 19, isToggled: false },
+        { tag: "di", stunde: 8, isToggled: false },
+        { tag: "di", stunde: 9, isToggled: false },
+        { tag: "di", stunde: 10, isToggled: false },
+        { tag: "di", stunde: 11, isToggled: false },
+        { tag: "di", stunde: 12, isToggled: false },
+        { tag: "di", stunde: 13, isToggled: false },
+        { tag: "di", stunde: 14, isToggled: false },
+        { tag: "di", stunde: 15, isToggled: false },
+        { tag: "di", stunde: 16, isToggled: false },
+        { tag: "di", stunde: 17, isToggled: false },
+        { tag: "di", stunde: 18, isToggled: false },
+        { tag: "di", stunde: 19, isToggled: false },
 
-        { tag: 'mi', stunde: 8, isToggled: false },
-        { tag: 'mi', stunde: 9, isToggled: false },
-        { tag: 'mi', stunde: 10, isToggled: false },
-        { tag: 'mi', stunde: 11, isToggled: false },
-        { tag: 'mi', stunde: 12, isToggled: false },
-        { tag: 'mi', stunde: 13, isToggled: false },
-        { tag: 'mi', stunde: 14, isToggled: false },
-        { tag: 'mi', stunde: 15, isToggled: false },
-        { tag: 'mi', stunde: 16, isToggled: false },
-        { tag: 'mi', stunde: 17, isToggled: false },
-        { tag: 'mi', stunde: 18, isToggled: false },
-        { tag: 'mi', stunde: 19, isToggled: false },
+        { tag: "mi", stunde: 8, isToggled: false },
+        { tag: "mi", stunde: 9, isToggled: false },
+        { tag: "mi", stunde: 10, isToggled: false },
+        { tag: "mi", stunde: 11, isToggled: false },
+        { tag: "mi", stunde: 12, isToggled: false },
+        { tag: "mi", stunde: 13, isToggled: false },
+        { tag: "mi", stunde: 14, isToggled: false },
+        { tag: "mi", stunde: 15, isToggled: false },
+        { tag: "mi", stunde: 16, isToggled: false },
+        { tag: "mi", stunde: 17, isToggled: false },
+        { tag: "mi", stunde: 18, isToggled: false },
+        { tag: "mi", stunde: 19, isToggled: false },
 
-        { tag: 'do', stunde: 8, isToggled: false },
-        { tag: 'do', stunde: 9, isToggled: false },
-        { tag: 'do', stunde: 10, isToggled: false },
-        { tag: 'do', stunde: 11, isToggled: false },
-        { tag: 'do', stunde: 12, isToggled: false },
-        { tag: 'do', stunde: 13, isToggled: false },
-        { tag: 'do', stunde: 14, isToggled: false },
-        { tag: 'do', stunde: 15, isToggled: false },
-        { tag: 'do', stunde: 16, isToggled: false },
-        { tag: 'do', stunde: 17, isToggled: false },
-        { tag: 'do', stunde: 18, isToggled: false },
-        { tag: 'do', stunde: 19, isToggled: false },
+        { tag: "do", stunde: 8, isToggled: false },
+        { tag: "do", stunde: 9, isToggled: false },
+        { tag: "do", stunde: 10, isToggled: false },
+        { tag: "do", stunde: 11, isToggled: false },
+        { tag: "do", stunde: 12, isToggled: false },
+        { tag: "do", stunde: 13, isToggled: false },
+        { tag: "do", stunde: 14, isToggled: false },
+        { tag: "do", stunde: 15, isToggled: false },
+        { tag: "do", stunde: 16, isToggled: false },
+        { tag: "do", stunde: 17, isToggled: false },
+        { tag: "do", stunde: 18, isToggled: false },
+        { tag: "do", stunde: 19, isToggled: false },
 
-        { tag: 'fr', stunde: 8, isToggled: false },
-        { tag: 'fr', stunde: 9, isToggled: false },
-        { tag: 'fr', stunde: 10, isToggled: false },
-        { tag: 'fr', stunde: 11, isToggled: false },
-        { tag: 'fr', stunde: 12, isToggled: false },
-        { tag: 'fr', stunde: 13, isToggled: false },
-        { tag: 'fr', stunde: 14, isToggled: false },
-        { tag: 'fr', stunde: 15, isToggled: false },
-        { tag: 'fr', stunde: 16, isToggled: false },
-        { tag: 'fr', stunde: 17, isToggled: false },
-        { tag: 'fr', stunde: 18, isToggled: false },
-        { tag: 'fr', stunde: 19, isToggled: false },
+        { tag: "fr", stunde: 8, isToggled: false },
+        { tag: "fr", stunde: 9, isToggled: false },
+        { tag: "fr", stunde: 10, isToggled: false },
+        { tag: "fr", stunde: 11, isToggled: false },
+        { tag: "fr", stunde: 12, isToggled: false },
+        { tag: "fr", stunde: 13, isToggled: false },
+        { tag: "fr", stunde: 14, isToggled: false },
+        { tag: "fr", stunde: 15, isToggled: false },
+        { tag: "fr", stunde: 16, isToggled: false },
+        { tag: "fr", stunde: 17, isToggled: false },
+        { tag: "fr", stunde: 18, isToggled: false },
+        { tag: "fr", stunde: 19, isToggled: false }
       ],
 
       parkPrefs: [
-        { tag: 'mo', pref: 'Parkplatzpräferenz' },
-        { tag: 'di', pref: 'Parkplatzpräferenz' },
-        { tag: 'mi', pref: 'Parkplatzpräferenz' },
-        { tag: 'do', pref: 'Parkplatzpräferenz' },
-        { tag: 'fr', pref: 'Parkplatzpräferenz' },
+        { tag: "mo", pref: "Parkplatzpräferenz" },
+        { tag: "di", pref: "Parkplatzpräferenz" },
+        { tag: "mi", pref: "Parkplatzpräferenz" },
+        { tag: "do", pref: "Parkplatzpräferenz" },
+        { tag: "fr", pref: "Parkplatzpräferenz" }
       ],
 
       flagsAllowed: 40,
-      currentYear: '',
-      currentWeek: '',
-      matnr: '',
-      parkwert: '',
+      currentYear: "",
+      currentWeek: "",
+      matnr: "",
+      parkwert: ""
     };
 
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
@@ -317,7 +317,7 @@ class Stundenplan extends Component {
         });
 
       return {
-        modifiedFlag,
+        modifiedFlag
       };
     });
   }
@@ -337,14 +337,14 @@ class Stundenplan extends Component {
         .map(currPref => (currPref.pref = p));
 
       return {
-        modifiedPref,
+        modifiedPref
       };
     });
   }
 
   /**
    * Hilfsfunktion um für die States die aktuelle Woche
-   * und das aktuelle Jahr zu bekommen
+   * und das aktuelle Jahr zu bekommen (nicht selbst geschrieben)
    */
   getWeekAndYear(d) {
     // Copy date so don't modify original
@@ -365,14 +365,14 @@ class Stundenplan extends Component {
 
     this.setState({
       currentWeek: weekAndYear[0],
-      currentYear: weekAndYear[1],
+      currentYear: weekAndYear[1]
     });
   }
 
   render() {
     return (
       <div>
-        <div align='center'>
+        <div align="center">
           <p>Erlaubte Reservierungen: {this.state.flagsAllowed}</p>
         </div>
 
@@ -384,8 +384,8 @@ class Stundenplan extends Component {
           flagsAllowed={this.state.flagsAllowed}
         />
 
-        <div className='SaveFoot'>
-          <Button variant='success'>Speichern</Button>
+        <div className="SaveFoot">
+          <Button variant="success">Speichern</Button>
         </div>
       </div>
     );
