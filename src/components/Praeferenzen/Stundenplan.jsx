@@ -3,38 +3,6 @@ import reactCSS from 'reactcss';
 import { Dropdown } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
-class Container extends Component {
-  render() {
-    const styles = reactCSS({
-      default: {
-        container: {
-          height: '48px',
-          borderRadius: '2px',
-          background: `rgba(70,70,70,1)`,
-        },
-        text: {
-          textAlign: 'center',
-          margin: '0',
-          color: 'white',
-          paddingTop: '10px',
-          cursor: 'default',
-        },
-      },
-      hover: {
-        text: {
-          cursor: 'default',
-        },
-      },
-    });
-
-    return (
-      <div style={styles.container}>
-        <p style={styles.text}>Präferenz</p>
-      </div>
-    );
-  }
-}
-
 class PraeferenzZelle extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +29,18 @@ class PraeferenzZelle extends Component {
           marginTop: '8px',
           color: `rgba(70,70,70,0.3)`,
         },
+        container: {
+          height: '48px',
+          borderRadius: '2px',
+          background: `rgba(70,70,70,1)`,
+        },
+        text: {
+          textAlign: 'center',
+          margin: '0',
+          color: 'white',
+          paddingTop: '10px',
+          cursor: 'default',
+        },
       },
     });
 
@@ -76,7 +56,13 @@ class PraeferenzZelle extends Component {
 
     return (
       <td onClick={this.handleToggleContainer} style={{ margin: '0', padding: '0' }}>
-        <div>{this.state.isToggled ? <Container /> : null}</div>
+        <div>
+          {this.state.isToggled ? (
+            <div style={styles.container}>
+              <p style={styles.text}>Präferenz</p>
+            </div>
+          ) : null}
+        </div>
       </td>
     );
   }
@@ -155,10 +141,43 @@ class ParkplatzDropdown extends Component {
 
 class Tabelle extends Component {
   render() {
-    const tabellenzeilen = [];
-    const dropdowns = [];
+    const stundenZeilen = [];
+    const parkplatzDropdowns = [];
+    const thead = (
+      <thead>
+        <tr>
+          <th scope='col'>Zeit</th>
+          <th scope='col'>
+            <div align='center'>Montag</div>
+          </th>
+          <th scope='col'>
+            <div align='center'>Dienstag</div>
+          </th>
+          <th scope='col'>
+            <div align='center'>Mittwoch</div>
+          </th>
+          <th scope='col'>
+            <div align='center'>Donnerstag</div>
+          </th>
+          <th scope='col'>
+            <div align='center'>Freitag</div>
+          </th>
+        </tr>
+      </thead>
+    );
+
+    const tbody = (
+      <tbody>
+        {stundenZeilen}
+        <tr>
+          <th scope='row'>Parkplatz</th>
+          {parkplatzDropdowns}
+        </tr>
+      </tbody>
+    );
+
     for (var i = 8; i <= 19; i++) {
-      tabellenzeilen.push(
+      stundenZeilen.push(
         <TabellenZeile
           key={i}
           handleToggleFlag={this.props.handleToggleFlag}
@@ -167,8 +186,9 @@ class Tabelle extends Component {
         />,
       );
     }
+
     for (var j = 0; j <= 4; j++) {
-      dropdowns.push(
+      parkplatzDropdowns.push(
         <td key={j}>
           <ParkplatzDropdown
             parkPrefs={this.props.parkPrefs[j]}
@@ -177,35 +197,11 @@ class Tabelle extends Component {
         </td>,
       );
     }
+
     return (
       <table className='table table-bordered'>
-        <thead>
-          <tr>
-            <th scope='col'>Zeit</th>
-            <th scope='col'>
-              <div align='center'>Montag</div>
-            </th>
-            <th scope='col'>
-              <div align='center'>Dienstag</div>
-            </th>
-            <th scope='col'>
-              <div align='center'>Mittwoch</div>
-            </th>
-            <th scope='col'>
-              <div align='center'>Donnerstag</div>
-            </th>
-            <th scope='col'>
-              <div align='center'>Freitag</div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {tabellenzeilen}
-          <tr>
-            <th scope='row'>Parkplatz</th>
-            {dropdowns}
-          </tr>
-        </tbody>
+        {thead}
+        {tbody}
       </table>
     );
   }
@@ -295,6 +291,7 @@ class Stundenplan extends Component {
       currentYear: '',
       currentWeek: '',
       matnr: '',
+      parkwert: '',
     };
 
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
