@@ -1,30 +1,30 @@
-import React, { Component } from "react";
-import reactCSS from "reactcss";
-import { Dropdown } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import React, { Component } from 'react';
+import reactCSS from 'reactcss';
+import { Dropdown } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 
 class Container extends Component {
   render() {
     const styles = reactCSS({
       default: {
         container: {
-          height: "48px",
-          borderRadius: "2px",
-          background: `rgba(70,70,70,1)`
+          height: '48px',
+          borderRadius: '2px',
+          background: `rgba(70,70,70,1)`,
         },
         text: {
-          textAlign: "center",
-          margin: "0",
-          color: "white",
-          paddingTop: "10px",
-          cursor: "default"
-        }
+          textAlign: 'center',
+          margin: '0',
+          color: 'white',
+          paddingTop: '10px',
+          cursor: 'default',
+        },
       },
       hover: {
         text: {
-          cursor: "default"
-        }
-      }
+          cursor: 'default',
+        },
+      },
     });
 
     return (
@@ -40,7 +40,7 @@ class PraeferenzZelle extends Component {
     super(props);
 
     this.state = {
-      isToggled: false
+      isToggled: false,
     };
   }
 
@@ -58,16 +58,16 @@ class PraeferenzZelle extends Component {
     const styles = reactCSS({
       default: {
         noFlags: {
-          marginTop: "8px",
-          color: `rgba(70,70,70,0.3)`
-        }
-      }
+          marginTop: '8px',
+          color: `rgba(70,70,70,0.3)`,
+        },
+      },
     });
 
     if (this.props.flagsAllowed === 40) {
       return (
-        <td onClick={this.handleToggleContainer} style={{ margin: "0", padding: "0" }}>
-          <div align="center">
+        <td onClick={this.handleToggleContainer} style={{ margin: '0', padding: '0' }}>
+          <div align='center'>
             <p style={styles.noFlags}>Hier klicken</p>
           </div>
         </td>
@@ -75,7 +75,7 @@ class PraeferenzZelle extends Component {
     }
 
     return (
-      <td onClick={this.handleToggleContainer} style={{ margin: "0", padding: "0" }}>
+      <td onClick={this.handleToggleContainer} style={{ margin: '0', padding: '0' }}>
         <div>{this.state.isToggled ? <Container /> : null}</div>
       </td>
     );
@@ -86,27 +86,27 @@ class TabellenZeile extends Component {
   render() {
     return (
       <tr>
-        <th scope="row">
+        <th scope='row'>
           {this.props.stunde}-{this.props.stunde + 1}
         </th>
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag("mo", this.props.stunde)}
+          onClick={() => this.props.handleToggleFlag('mo', this.props.stunde)}
           flagsAllowed={this.props.flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag("di", this.props.stunde)}
+          onClick={() => this.props.handleToggleFlag('di', this.props.stunde)}
           flagsAllowed={this.props.flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag("mi", this.props.stunde)}
+          onClick={() => this.props.handleToggleFlag('mi', this.props.stunde)}
           flagsAllowed={this.props.flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag("do", this.props.stunde)}
+          onClick={() => this.props.handleToggleFlag('do', this.props.stunde)}
           flagsAllowed={this.props.flagsAllowed}
         />
         <PraeferenzZelle
-          onClick={() => this.props.handleToggleFlag("fr", this.props.stunde)}
+          onClick={() => this.props.handleToggleFlag('fr', this.props.stunde)}
           flagsAllowed={this.props.flagsAllowed}
         />
       </tr>
@@ -118,37 +118,33 @@ class ParkplatzDropdown extends Component {
   render() {
     return (
       <Dropdown>
-        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
           {this.props.parkPrefs.pref}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item
             onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, "Eingangsparkplatz")
-            }
-          >
+              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'Eingangsparkplatz')
+            }>
             Eingangsparkplatz
           </Dropdown.Item>
           <Dropdown.Item
             onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, "RUB-Parkplatz")
-            }
-          >
+              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'RUB-Parkplatz')
+            }>
             RUB-Parkplatz
           </Dropdown.Item>
           <Dropdown.Item
             onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, "Hauptparkplatz")
-            }
-          >
+              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'Hauptparkplatz')
+            }>
             Hauptparkplatz
           </Dropdown.Item>
           <Dropdown.Item
             onSelect={() =>
-              this.props.handleSelectParkPref(this.props.parkPrefs.tag, "E-Parkplatz")
-            }
-          >
+              this.props.handleSelectParkPref(this.props.parkPrefs.tag, 'E-Parkplatz')
+            }>
             E-Parkplatz
           </Dropdown.Item>
         </Dropdown.Menu>
@@ -168,7 +164,7 @@ class Tabelle extends Component {
           handleToggleFlag={this.props.handleToggleFlag}
           stunde={i}
           flagsAllowed={this.props.flagsAllowed}
-        />
+        />,
       );
     }
     for (var j = 0; j <= 4; j++) {
@@ -178,35 +174,35 @@ class Tabelle extends Component {
             parkPrefs={this.props.parkPrefs[j]}
             handleSelectParkPref={this.props.handleSelectParkPref}
           />
-        </td>
+        </td>,
       );
     }
     return (
-      <table className="table table-bordered">
+      <table className='table table-bordered'>
         <thead>
           <tr>
-            <th scope="col">Zeit</th>
-            <th scope="col">
-              <div align="center">Montag</div>
+            <th scope='col'>Zeit</th>
+            <th scope='col'>
+              <div align='center'>Montag</div>
             </th>
-            <th scope="col">
-              <div align="center">Dienstag</div>
+            <th scope='col'>
+              <div align='center'>Dienstag</div>
             </th>
-            <th scope="col">
-              <div align="center">Mittwoch</div>
+            <th scope='col'>
+              <div align='center'>Mittwoch</div>
             </th>
-            <th scope="col">
-              <div align="center">Donnerstag</div>
+            <th scope='col'>
+              <div align='center'>Donnerstag</div>
             </th>
-            <th scope="col">
-              <div align="center">Freitag</div>
+            <th scope='col'>
+              <div align='center'>Freitag</div>
             </th>
           </tr>
         </thead>
         <tbody>
           {tabellenzeilen}
           <tr>
-            <th scope="row">Parkplatz</th>
+            <th scope='row'>Parkplatz</th>
             {dropdowns}
           </tr>
         </tbody>
@@ -221,84 +217,84 @@ class Stundenplan extends Component {
 
     this.state = {
       flags: [
-        { tag: "mo", stunde: 8, isToggled: false },
-        { tag: "mo", stunde: 9, isToggled: false },
-        { tag: "mo", stunde: 10, isToggled: false },
-        { tag: "mo", stunde: 11, isToggled: false },
-        { tag: "mo", stunde: 12, isToggled: false },
-        { tag: "mo", stunde: 13, isToggled: false },
-        { tag: "mo", stunde: 14, isToggled: false },
-        { tag: "mo", stunde: 15, isToggled: false },
-        { tag: "mo", stunde: 16, isToggled: false },
-        { tag: "mo", stunde: 17, isToggled: false },
-        { tag: "mo", stunde: 18, isToggled: false },
-        { tag: "mo", stunde: 19, isToggled: false },
+        { tag: 'mo', stunde: 8, isToggled: false },
+        { tag: 'mo', stunde: 9, isToggled: false },
+        { tag: 'mo', stunde: 10, isToggled: false },
+        { tag: 'mo', stunde: 11, isToggled: false },
+        { tag: 'mo', stunde: 12, isToggled: false },
+        { tag: 'mo', stunde: 13, isToggled: false },
+        { tag: 'mo', stunde: 14, isToggled: false },
+        { tag: 'mo', stunde: 15, isToggled: false },
+        { tag: 'mo', stunde: 16, isToggled: false },
+        { tag: 'mo', stunde: 17, isToggled: false },
+        { tag: 'mo', stunde: 18, isToggled: false },
+        { tag: 'mo', stunde: 19, isToggled: false },
 
-        { tag: "di", stunde: 8, isToggled: false },
-        { tag: "di", stunde: 9, isToggled: false },
-        { tag: "di", stunde: 10, isToggled: false },
-        { tag: "di", stunde: 11, isToggled: false },
-        { tag: "di", stunde: 12, isToggled: false },
-        { tag: "di", stunde: 13, isToggled: false },
-        { tag: "di", stunde: 14, isToggled: false },
-        { tag: "di", stunde: 15, isToggled: false },
-        { tag: "di", stunde: 16, isToggled: false },
-        { tag: "di", stunde: 17, isToggled: false },
-        { tag: "di", stunde: 18, isToggled: false },
-        { tag: "di", stunde: 19, isToggled: false },
+        { tag: 'di', stunde: 8, isToggled: false },
+        { tag: 'di', stunde: 9, isToggled: false },
+        { tag: 'di', stunde: 10, isToggled: false },
+        { tag: 'di', stunde: 11, isToggled: false },
+        { tag: 'di', stunde: 12, isToggled: false },
+        { tag: 'di', stunde: 13, isToggled: false },
+        { tag: 'di', stunde: 14, isToggled: false },
+        { tag: 'di', stunde: 15, isToggled: false },
+        { tag: 'di', stunde: 16, isToggled: false },
+        { tag: 'di', stunde: 17, isToggled: false },
+        { tag: 'di', stunde: 18, isToggled: false },
+        { tag: 'di', stunde: 19, isToggled: false },
 
-        { tag: "mi", stunde: 8, isToggled: false },
-        { tag: "mi", stunde: 9, isToggled: false },
-        { tag: "mi", stunde: 10, isToggled: false },
-        { tag: "mi", stunde: 11, isToggled: false },
-        { tag: "mi", stunde: 12, isToggled: false },
-        { tag: "mi", stunde: 13, isToggled: false },
-        { tag: "mi", stunde: 14, isToggled: false },
-        { tag: "mi", stunde: 15, isToggled: false },
-        { tag: "mi", stunde: 16, isToggled: false },
-        { tag: "mi", stunde: 17, isToggled: false },
-        { tag: "mi", stunde: 18, isToggled: false },
-        { tag: "mi", stunde: 19, isToggled: false },
+        { tag: 'mi', stunde: 8, isToggled: false },
+        { tag: 'mi', stunde: 9, isToggled: false },
+        { tag: 'mi', stunde: 10, isToggled: false },
+        { tag: 'mi', stunde: 11, isToggled: false },
+        { tag: 'mi', stunde: 12, isToggled: false },
+        { tag: 'mi', stunde: 13, isToggled: false },
+        { tag: 'mi', stunde: 14, isToggled: false },
+        { tag: 'mi', stunde: 15, isToggled: false },
+        { tag: 'mi', stunde: 16, isToggled: false },
+        { tag: 'mi', stunde: 17, isToggled: false },
+        { tag: 'mi', stunde: 18, isToggled: false },
+        { tag: 'mi', stunde: 19, isToggled: false },
 
-        { tag: "do", stunde: 8, isToggled: false },
-        { tag: "do", stunde: 9, isToggled: false },
-        { tag: "do", stunde: 10, isToggled: false },
-        { tag: "do", stunde: 11, isToggled: false },
-        { tag: "do", stunde: 12, isToggled: false },
-        { tag: "do", stunde: 13, isToggled: false },
-        { tag: "do", stunde: 14, isToggled: false },
-        { tag: "do", stunde: 15, isToggled: false },
-        { tag: "do", stunde: 16, isToggled: false },
-        { tag: "do", stunde: 17, isToggled: false },
-        { tag: "do", stunde: 18, isToggled: false },
-        { tag: "do", stunde: 19, isToggled: false },
+        { tag: 'do', stunde: 8, isToggled: false },
+        { tag: 'do', stunde: 9, isToggled: false },
+        { tag: 'do', stunde: 10, isToggled: false },
+        { tag: 'do', stunde: 11, isToggled: false },
+        { tag: 'do', stunde: 12, isToggled: false },
+        { tag: 'do', stunde: 13, isToggled: false },
+        { tag: 'do', stunde: 14, isToggled: false },
+        { tag: 'do', stunde: 15, isToggled: false },
+        { tag: 'do', stunde: 16, isToggled: false },
+        { tag: 'do', stunde: 17, isToggled: false },
+        { tag: 'do', stunde: 18, isToggled: false },
+        { tag: 'do', stunde: 19, isToggled: false },
 
-        { tag: "fr", stunde: 8, isToggled: false },
-        { tag: "fr", stunde: 9, isToggled: false },
-        { tag: "fr", stunde: 10, isToggled: false },
-        { tag: "fr", stunde: 11, isToggled: false },
-        { tag: "fr", stunde: 12, isToggled: false },
-        { tag: "fr", stunde: 13, isToggled: false },
-        { tag: "fr", stunde: 14, isToggled: false },
-        { tag: "fr", stunde: 15, isToggled: false },
-        { tag: "fr", stunde: 16, isToggled: false },
-        { tag: "fr", stunde: 17, isToggled: false },
-        { tag: "fr", stunde: 18, isToggled: false },
-        { tag: "fr", stunde: 19, isToggled: false }
+        { tag: 'fr', stunde: 8, isToggled: false },
+        { tag: 'fr', stunde: 9, isToggled: false },
+        { tag: 'fr', stunde: 10, isToggled: false },
+        { tag: 'fr', stunde: 11, isToggled: false },
+        { tag: 'fr', stunde: 12, isToggled: false },
+        { tag: 'fr', stunde: 13, isToggled: false },
+        { tag: 'fr', stunde: 14, isToggled: false },
+        { tag: 'fr', stunde: 15, isToggled: false },
+        { tag: 'fr', stunde: 16, isToggled: false },
+        { tag: 'fr', stunde: 17, isToggled: false },
+        { tag: 'fr', stunde: 18, isToggled: false },
+        { tag: 'fr', stunde: 19, isToggled: false },
       ],
 
       parkPrefs: [
-        { tag: "mo", pref: "Parkplatzpräferenz" },
-        { tag: "di", pref: "Parkplatzpräferenz" },
-        { tag: "mi", pref: "Parkplatzpräferenz" },
-        { tag: "do", pref: "Parkplatzpräferenz" },
-        { tag: "fr", pref: "Parkplatzpräferenz" }
+        { tag: 'mo', pref: 'Parkplatzpräferenz' },
+        { tag: 'di', pref: 'Parkplatzpräferenz' },
+        { tag: 'mi', pref: 'Parkplatzpräferenz' },
+        { tag: 'do', pref: 'Parkplatzpräferenz' },
+        { tag: 'fr', pref: 'Parkplatzpräferenz' },
       ],
 
       flagsAllowed: 40,
-      currentYear: 0,
-      currentWeek: 0,
-      userID: ""
+      currentYear: '',
+      currentWeek: '',
+      matnr: '',
     };
 
     this.handleToggleFlag = this.handleToggleFlag.bind(this);
@@ -324,7 +320,7 @@ class Stundenplan extends Component {
         });
 
       return {
-        modifiedFlag
+        modifiedFlag,
       };
     });
   }
@@ -344,7 +340,7 @@ class Stundenplan extends Component {
         .map(currPref => (currPref.pref = p));
 
       return {
-        modifiedPref
+        modifiedPref,
       };
     });
   }
@@ -372,16 +368,17 @@ class Stundenplan extends Component {
 
     this.setState({
       currentWeek: weekAndYear[0],
-      currentYear: weekAndYear[1]
+      currentYear: weekAndYear[1],
     });
   }
 
   render() {
     return (
       <div>
-        <div align="center">
+        <div align='center'>
           <p>Erlaubte Reservierungen: {this.state.flagsAllowed}</p>
         </div>
+
         <Tabelle
           flags={this.state.flags}
           handleToggleFlag={this.handleToggleFlag}
@@ -390,8 +387,8 @@ class Stundenplan extends Component {
           flagsAllowed={this.state.flagsAllowed}
         />
 
-        <div className="SaveFoot">
-          <Button variant="success">Speichern</Button>
+        <div className='SaveFoot'>
+          <Button variant='success'>Speichern</Button>
         </div>
       </div>
     );
