@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import SpeicherButton from "./SpeicherButton";
+import Button from "react-bootstrap/Button";
 
 class Footer extends Component {
   render() {
     return (
       <div className="MainFooter">
         <div className="SaveFoot">
-          <SpeicherButton />
+          <Button variant="success">Speichern</Button>
         </div>
       </div>
     );
