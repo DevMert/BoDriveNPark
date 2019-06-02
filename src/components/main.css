@@ -1,0 +1,5 @@
+.stdplan{
+    display: flex;
+    justify-content: center;
+    flex-grow: auto;
+}
