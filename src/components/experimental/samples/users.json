@@ -2,17 +2,17 @@
   "users": [
     {
       "flags": [
-        { "tag": "mo", "stunde": 8, "isToggled": true },
-        { "tag": "mo", "stunde": 9, "isToggled": true },
-        { "tag": "mo", "stunde": 10, "isToggled": true },
+        { "tag": "mo", "stunde": 8, "isToggled": false },
+        { "tag": "mo", "stunde": 9, "isToggled": false },
+        { "tag": "mo", "stunde": 10, "isToggled": false },
         { "tag": "mo", "stunde": 11, "isToggled": false },
         { "tag": "mo", "stunde": 12, "isToggled": false },
-        { "tag": "mo", "stunde": 13, "isToggled": true },
-        { "tag": "mo", "stunde": 14, "isToggled": true },
-        { "tag": "mo", "stunde": 15, "isToggled": true },
+        { "tag": "mo", "stunde": 13, "isToggled": false },
+        { "tag": "mo", "stunde": 14, "isToggled": false },
+        { "tag": "mo", "stunde": 15, "isToggled": false },
         { "tag": "mo", "stunde": 16, "isToggled": true },
-        { "tag": "mo", "stunde": 17, "isToggled": false },
-        { "tag": "mo", "stunde": 18, "isToggled": false },
+        { "tag": "mo", "stunde": 17, "isToggled": true },
+        { "tag": "mo", "stunde": 18, "isToggled": true },
         { "tag": "mo", "stunde": 19, "isToggled": false },
 
         { "tag": "di", "stunde": 8, "isToggled": false },
@@ -80,7 +80,7 @@
       "currentYear": 0,
       "currentWeek": 0,
       "matnr": 1,
-      "parkwert": 20
+      "parkwert": 1
     },
     {
       "flags": [
@@ -162,7 +162,7 @@
       "currentYear": 0,
       "currentWeek": 0,
       "matnr": 2,
-      "parkwert": 55
+      "parkwert": 1
     },
     {
       "flags": [
