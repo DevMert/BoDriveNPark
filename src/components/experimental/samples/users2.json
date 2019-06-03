@@ -92,7 +92,7 @@
         { "tag": "mo", "stunde": 13, "isToggled": true },
         { "tag": "mo", "stunde": 14, "isToggled": true },
         { "tag": "mo", "stunde": 15, "isToggled": true },
-        { "tag": "mo", "stunde": 16, "isToggled": true },
+        { "tag": "mo", "stunde": 16, "isToggled": false },
         { "tag": "mo", "stunde": 17, "isToggled": false },
         { "tag": "mo", "stunde": 18, "isToggled": false },
         { "tag": "mo", "stunde": 19, "isToggled": false },

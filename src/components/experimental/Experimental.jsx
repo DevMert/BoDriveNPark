@@ -1,7 +1,7 @@
 //Designed by Daniel Tura
 
 import React, { Component } from "react";
-import data from "./samples/users2";
+import data from "./samples/users";
 
 class Parkstunde {
   constructor(stunde, isTog) {
@@ -157,11 +157,40 @@ class Experimental extends Component {
 
     //Parkplätze belegen
 
-    HP.addUser(users[0]);
-    HP.addUser(users[1]);
-    console.log(HP.getUsers());
-    HP.removeUser();
+    var buddies = this.getParkBuddies(users, tag);
+    console.log(buddies);
   };
+  //------------------------------------------------------------------------
+
+  getParkBuddies(users, tag) {
+    var emptyPF = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ];
+    var buddies = [];
+    var uArr = [];
+    users.map(user => {
+      uArr = this.getUserFlagArray(user, tag);
+      if (this.checkAvail(emptyPF, uArr)) {
+        buddies.push(user);
+        for (var i = 0; i < emptyPF.length; i++) {
+          emptyPF[i] = uArr[i];
+        }
+      }
+    });
+
+    return buddies;
+  }
 
   /**
    * Lösche den user mit der gegebenen matnr aus users
@@ -170,7 +199,7 @@ class Experimental extends Component {
     return users.filter(user => !(user.matnr === matnr));
   }
 
-  compareArrays(pArr, uArr) {
+  checkAvail(pArr, uArr) {
     for (var i = 0; i < pArr.length; i++) {
       if (pArr[i] === true && uArr[i] === true) return false;
     }
