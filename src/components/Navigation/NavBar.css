@@ -4,23 +4,29 @@
   min-height: 10vh;
   background: #ff0f0f;
   color: rgb(255, 255, 255);
-}
+  border: black;
+
+  border-style: solid;
+  }
 
 .links {
   display: flex;
   justify-content: flex-end ;
+  width: 600px;
 }
 
 .mr-auto{
   display: flex;
   justify-content: space-evenly;
-  align-content: center
+  align-content: center;
 }
 .Navi .pref{
   display: flex;
   font-size: 150%;
   width: 400px;
   flex-grow: 1;
+  border-style: solid;
+  border-width: 3px;
   
 }
 .Navi .reserv{
@@ -28,6 +34,8 @@
   font-size: 150%;
   width: 400px;
   flex-grow: 1;
+  border-style: solid;
+  border-width: 3px;
 }
 
 .Navi .map{
@@ -35,13 +43,16 @@
   font-size: 150%;
   width: 400px;
   flex-grow: 1;
+  border-style: solid;
+  border-width: 3px;
 }
 
 .Navi .exp{
   display: flex;
   font-size: 150%;
- 
   flex-grow: 1;
+  border-style: solid;
+  border-width: 3px;
 }
 
 .Navi .brand{
@@ -51,4 +62,62 @@
   font-size: 200%;
   align-self: flex-start
   
+}
+
+@media all and (max-width: 1366px){
+  .Navi .pref{
+    display: flex;
+    font-size: 150%;
+    width: 150px;
+    flex-grow: 1;
+    border-style: solid;
+  border-width: 3px;
+    
+  }
+
+  .Navi .reserv{
+  display: flex;
+  font-size: 150%;
+  width: 200px;
+  flex-grow: 1;
+  border-style: solid;
+  border-width: 3px;
+  }
+
+  .Navi .map{
+    display: flex;
+    font-size: 150%;
+    width: 100px;
+    flex-grow: 1;
+    border-style: solid;
+    border-width: 3px;
+  }
+
+  .Navi .exp{
+    display: flex;
+    font-size: 150%;
+    width: 100px;
+    flex-grow: 1;
+    border-style: solid;
+    border-width: 3px;
+  }
+
+  .Navi .brand{
+    display: flex;
+    justify-content: flex-start;
+    color: white;
+    font-size: 200%;
+    align-self: flex-start;
+    
+  }
+
+}
+
+@media all and (max-width: 500px){
+  .Navi{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
 }
