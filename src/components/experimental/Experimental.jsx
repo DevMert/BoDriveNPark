@@ -1,7 +1,7 @@
 //Designed by Daniel Tura
 
-import React, { Component } from 'react';
-import data from './samples/users';
+import React, { Component } from "react";
+import data from "./samples/users";
 
 class Parkplatz {
   constructor(MAX_Slots) {
@@ -38,6 +38,14 @@ class Experimental extends Component {
       this.gapFiller(user, tag);
     });
 
+    //User bekommen für Testzwecke zufällige Parkwerte
+    users.map(u => {
+      u.parkwert = Math.floor(Math.random() * 200) + 20;
+      console.log(
+        "User nr. " + u.matnr + " hat folgenden Parkwert: " + u.parkwert
+      );
+    });
+
     /*User werden nach Parkwert sortiert*/
     users.sort(function(a, b) {
       return a.parkwert - b.parkwert;
@@ -54,7 +62,7 @@ class Experimental extends Component {
     var loops = users.length;
 
     for (var i = 0; i < loops; i++) {
-      temp = this.fillSlots(users, tag, 'Hauptparkplatz');
+      temp = this.fillSlots(users, tag, "Hauptparkplatz");
       if (temp !== undefined) {
         parkBuddiesHP.push(temp);
         temp.forEach(user => (users = this.deleteUser(users, user.matnr)));
@@ -78,7 +86,7 @@ class Experimental extends Component {
       false,
       false,
       false,
-      false,
+      false
     ];
     var filteredUsers = this.getFilteredUsers(users, tag, pref);
 
@@ -102,19 +110,19 @@ class Experimental extends Component {
   getFilteredUsers(users, tag, pref) {
     var tag_Index;
     switch (tag) {
-      case 'mo':
+      case "mo":
         tag_Index = 0;
         break;
-      case 'di':
+      case "di":
         tag_Index = 1;
         break;
-      case 'mi':
+      case "mi":
         tag_Index = 2;
         break;
-      case 'do':
+      case "do":
         tag_Index = 3;
         break;
-      case 'fr':
+      case "fr":
         tag_Index = 4;
         break;
       default:
@@ -124,7 +132,10 @@ class Experimental extends Component {
     var filteredUsers = [];
 
     users.forEach(user => {
-      if (user.parkPrefs[tag_Index].pref === pref || user.parkPrefs[tag_Index].pref === 'Egal') {
+      if (
+        user.parkPrefs[tag_Index].pref === pref ||
+        user.parkPrefs[tag_Index].pref === "Egal"
+      ) {
         filteredUsers.push(user);
       }
     });
@@ -180,11 +191,13 @@ class Experimental extends Component {
 
     //Anpassung der flags des Users
     var c = 0;
-    user.flags.filter(flag => flag.tag === tag).map(flag => (flag.isToggled = flagArr[c++]));
+    user.flags
+      .filter(flag => flag.tag === tag)
+      .map(flag => (flag.isToggled = flagArr[c++]));
   }
 
   componentDidMount() {
-    this.algo2('mo');
+    this.algo2("mo");
   }
 
   render() {
