@@ -2,7 +2,8 @@
 
 import React, { Component } from "react";
 import reactCSS from "reactcss";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Row, Col } from "react-bootstrap";
+import Toast from "react-bootstrap/Toast";
 import Button from "react-bootstrap/Button";
 
 class PraeferenzZelle extends Component {
@@ -48,7 +49,10 @@ class PraeferenzZelle extends Component {
 
     if (this.props.flagsAllowed === 40) {
       return (
-        <td onClick={this.handleToggleContainer} style={{ margin: "0", padding: "0" }}>
+        <td
+          onClick={this.handleToggleContainer}
+          style={{ margin: "0", padding: "0" }}
+        >
           <div align="center">
             <p style={styles.noFlags}>Hier klicken</p>
           </div>
@@ -57,7 +61,10 @@ class PraeferenzZelle extends Component {
     }
 
     return (
-      <td onClick={this.handleToggleContainer} style={{ margin: "0", padding: "0" }}>
+      <td
+        onClick={this.handleToggleContainer}
+        style={{ margin: "0", padding: "0" }}
+      >
         <div>
           {this.state.isToggled ? (
             <div style={styles.container}>
@@ -118,19 +125,29 @@ class ParkplatzDropdown extends Component {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "Eingangsparkplatz")}>
+          <Dropdown.Item
+            onSelect={() => handleSelectParkPref(tag, "Eingangsparkplatz")}
+          >
             Eingangsparkplatz
           </Dropdown.Item>
-          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "RUB-Parkplatz")}>
+          <Dropdown.Item
+            onSelect={() => handleSelectParkPref(tag, "RUB-Parkplatz")}
+          >
             RUB-Parkplatz
           </Dropdown.Item>
-          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "Hauptparkplatz")}>
+          <Dropdown.Item
+            onSelect={() => handleSelectParkPref(tag, "Hauptparkplatz")}
+          >
             Hauptparkplatz
           </Dropdown.Item>
-          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "E-Parkplatz")}>
+          <Dropdown.Item
+            onSelect={() => handleSelectParkPref(tag, "E-Parkplatz")}
+          >
             E-Parkplatz
           </Dropdown.Item>
-          <Dropdown.Item onSelect={() => handleSelectParkPref(tag, "Alle HS-parkplätze")}>
+          <Dropdown.Item
+            onSelect={() => handleSelectParkPref(tag, "Alle HS-parkplätze")}
+          >
             <b>Alle HS-parkplätze</b>
           </Dropdown.Item>
         </Dropdown.Menu>
@@ -312,7 +329,9 @@ class Stundenplan extends Component {
       const modifiedFlag = currentState.flags
         .filter(flag => flag.tag === t && flag.stunde === s)
         .map(flag => {
-          flag.isToggled ? currentState.flagsAllowed++ : currentState.flagsAllowed--;
+          flag.isToggled
+            ? currentState.flagsAllowed++
+            : currentState.flagsAllowed--;
           flag.isToggled = !flag.isToggled;
         });
 
@@ -385,7 +404,7 @@ class Stundenplan extends Component {
         />
 
         <div className="SaveFoot">
-          <Button variant="success">Speichern</Button>
+          <Benachrichtigung />
         </div>
       </div>
     );
@@ -393,3 +412,45 @@ class Stundenplan extends Component {
 }
 
 export default Stundenplan;
+
+class Benachrichtigung extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
+
+  render() {
+    const { show } = this.state;
+    const handleShow = () => this.setState({ show: true });
+    const handleClose = () => this.setState({ show: false });
+    return (
+      <Row>
+        <Col xs={2}>
+          <Button
+            style={{ width: "150px", background: "green", border: "green" }}
+            onClick={handleShow}
+          >
+            Speichern
+          </Button>
+        </Col>
+        <Col xs={10}>
+          <Toast
+            style={{ float: "right", width: "300px" }}
+            onClose={handleClose}
+            show={show}
+            delay={3000}
+            autohide
+          >
+            <Toast.Header>
+              <strong className="mr-auto">Präferenz speichern</strong>
+              <small>Schließen</small>
+            </Toast.Header>
+            <Toast.Body>Erfolgreich gespeichert!</Toast.Body>
+          </Toast>
+        </Col>
+      </Row>
+    );
+  }
+}
