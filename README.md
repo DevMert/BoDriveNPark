@@ -5,7 +5,7 @@
 
 
 # MongoDB Server starten 
-server.js Dateipfad auswählen: bsp.  C:\Users\Timur\Desktop\BoDrive\server> ###node server.js
+server.js Dateipfad auswählen: bsp.  C:\Users\Timur\Desktop\BoDrive\server> node server.js
 
 
 # MongoDB Client starten 
