@@ -1,41 +1,21 @@
-//Designed by Daniel tura
-
 import React, { Component } from "react";
 import reactCSS from "reactcss";
-import { Dropdown, Row, Col } from "react-bootstrap";
-import Toast from "react-bootstrap/Toast";
-import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
+import Spinner from "react-bootstrap/Spinner";
 
-class PraeferenzZelle extends Component {
-  constructor(props) {
-    super(props);
+//DB API
+const API = "http://localhost:8080/";
+const QUERY = "users/71237112"; //noch statisch - muss man mit einer Session bearbeiten
 
-    this.state = {
-      isToggled: false
-    };
-  }
+//muss ausgebaut werden -> Verändere den State, bei click auf Speichern -> Schreibe in die DB
 
-  handleToggleContainer = () => {
-    const { flagsAllowed, onClick } = this.props;
-    const { isToggled } = this.state;
-
-    if (flagsAllowed > 0 || (flagsAllowed === 0 && isToggled === true)) {
-      this.setState({ isToggled: !isToggled });
-      onClick();
-    } else if (flagsAllowed === 0 && isToggled === false) return;
-  };
-
+class TableRow extends Component {
   render() {
     const styles = reactCSS({
       default: {
-        noFlags: {
-          marginTop: "8px",
-          color: `rgba(70,70,70,0.3)`
-        },
         container: {
-          height: "48px",
-          borderRadius: "2px",
-          background: `rgba(70,70,70,1)`
+          height: "auto",
+          background: `green`
         },
         text: {
           textAlign: "center",
@@ -43,123 +23,79 @@ class PraeferenzZelle extends Component {
           color: "white",
           paddingTop: "10px",
           cursor: "default"
+        },
+        false: {
+          backgroundColor: "gray",
+          height: "50px"
         }
       }
     });
+    const { stunde, user, counter } = this.props;
 
-    if (this.props.flagsAllowed === 40) {
-      return (
-        <td
-          onClick={this.handleToggleContainer}
-          style={{ margin: "0", padding: "0" }}
-        >
-          <div align="center">
-            <p style={styles.noFlags}>Hier klicken</p>
-          </div>
-        </td>
-      );
-    }
-
-    return (
-      <td
-        onClick={this.handleToggleContainer}
-        style={{ margin: "0", padding: "0" }}
-      >
-        <div>
-          {this.state.isToggled ? (
-            <div style={styles.container}>
-              <p style={styles.text}>Präferenz</p>
-            </div>
-          ) : null}
-        </div>
-      </td>
-    );
-  }
-}
-
-class TabellenZeile extends Component {
-  render() {
-    const { stunde, flagsAllowed, handleToggleFlag } = this.props;
+    const setCellState = (user, counter) => {
+      const list = user.map((item, j) => {});
+    };
 
     return (
       <tr>
-        <th scope="row">
+        <td>
           {stunde}-{stunde + 1}
-        </th>
-        <PraeferenzZelle
-          onClick={() => handleToggleFlag("mo", stunde)}
-          flagsAllowed={flagsAllowed}
-        />
-        <PraeferenzZelle
-          onClick={() => handleToggleFlag("di", stunde)}
-          flagsAllowed={flagsAllowed}
-        />
-        <PraeferenzZelle
-          onClick={() => handleToggleFlag("mi", stunde)}
-          flagsAllowed={flagsAllowed}
-        />
-        <PraeferenzZelle
-          onClick={() => handleToggleFlag("do", stunde)}
-          flagsAllowed={flagsAllowed}
-        />
-        <PraeferenzZelle
-          onClick={() => handleToggleFlag("fr", stunde)}
-          flagsAllowed={flagsAllowed}
-        />
+        </td>
+        <td onClick={() => setCellState(user.montag, counter)}>
+          <div>
+            {user.montag[counter].selected ? (
+              <div style={styles.container}>
+                <p style={styles.text}>Präferenz</p>
+              </div>
+            ) : null}
+          </div>
+        </td>
+        <td>
+          <div>
+            {user.dienstag[counter].selected ? (
+              <div style={styles.container}>
+                <p style={styles.text}>Präferenz</p>
+              </div>
+            ) : null}
+          </div>
+        </td>
+        <td>
+          <div>
+            {user.mittwoch[counter].selected ? (
+              <div style={styles.container}>
+                <p style={styles.text}>Präferenz</p>
+              </div>
+            ) : null}
+          </div>
+        </td>
+        <td>
+          <div>
+            {user.donnerstag[counter].selected ? (
+              <div style={styles.container}>
+                <p style={styles.text}>Präferenz</p>
+              </div>
+            ) : null}
+          </div>
+        </td>
+        <td>
+          <div>
+            {user.freitag[counter].selected ? (
+              <div style={styles.container}>
+                <p style={styles.text}>Präferenz</p>
+              </div>
+            ) : null}
+          </div>
+        </td>
       </tr>
     );
   }
 }
-
-class ParkplatzDropdown extends Component {
-  render() {
-    const {
-      handleSelectParkPref,
-      parkPrefs: { tag, pref }
-    } = this.props;
-
-    return (
-      <Dropdown>
-        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-          {pref}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item
-            onSelect={() => handleSelectParkPref(tag, "Eingangsparkplatz")}
-          >
-            Eingangsparkplatz
-          </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() => handleSelectParkPref(tag, "RUB-Parkplatz")}
-          >
-            RUB-Parkplatz
-          </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() => handleSelectParkPref(tag, "Hauptparkplatz")}
-          >
-            Hauptparkplatz
-          </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() => handleSelectParkPref(tag, "E-Parkplatz")}
-          >
-            E-Parkplatz
-          </Dropdown.Item>
-          <Dropdown.Item
-            onSelect={() => handleSelectParkPref(tag, "Alle HS-parkplätze")}
-          >
-            <b>Alle HS-parkplätze</b>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  }
-}
-
 class Tabelle extends Component {
   render() {
-    const stundenZeilen = [];
-    const parkplatzDropdowns = [];
+    const { user } = this.props;
+    const tableRow = [];
+
+    // Stundenplan header bereich
     const thead = (
       <thead>
         <tr>
@@ -183,43 +119,26 @@ class Tabelle extends Component {
       </thead>
     );
 
-    const tbody = (
-      <tbody>
-        {stundenZeilen}
-        <tr>
-          <th scope="row">Parkplatz</th>
-          {parkplatzDropdowns}
-        </tr>
-      </tbody>
-    );
+    const tbody = <tbody>{tableRow}</tbody>;
 
-    for (var i = 8; i <= 19; i++) {
-      stundenZeilen.push(
-        <TabellenZeile
-          key={i}
-          handleToggleFlag={this.props.handleToggleFlag}
-          stunde={i}
-          flagsAllowed={this.props.flagsAllowed}
-        />
+    //Generiert für jeden tag die Zellen
+    for (let i = 8; i <= 17; i++) {
+      tableRow.push(
+        <TableRow key={i} stunde={i} user={user} counter={i - 8} />
       );
-    }
-
-    for (var j = 0; j <= 4; j++) {
-      parkplatzDropdowns.push(
-        <td key={j}>
-          <ParkplatzDropdown
-            parkPrefs={this.props.parkPrefs[j]}
-            handleSelectParkPref={this.props.handleSelectParkPref}
-          />
-        </td>
-      );
+      // key: jede zelle muss ein unique key haben
+      // stunde: links im Plan die Stunden anzeigen
+      // user: schicke daten vom Server zu -> fetch data
+      // counter: um zu prüfen ob in stunde {counter} etwas ausgewählt wurde
     }
 
     return (
-      <table className="table table-bordered">
-        {thead}
-        {tbody}
-      </table>
+      <div>
+        <Table striped bordered hover>
+          {thead}
+          {tbody}
+        </Table>
+      </div>
     );
   }
 }
@@ -228,184 +147,132 @@ class Stundenplan extends Component {
   constructor(props) {
     super(props);
 
+    //this.state aufgebaut wie in der DB
     this.state = {
-      flags: [
-        { tag: "mo", stunde: 8, isToggled: false },
-        { tag: "mo", stunde: 9, isToggled: false },
-        { tag: "mo", stunde: 10, isToggled: false },
-        { tag: "mo", stunde: 11, isToggled: false },
-        { tag: "mo", stunde: 12, isToggled: false },
-        { tag: "mo", stunde: 13, isToggled: false },
-        { tag: "mo", stunde: 14, isToggled: false },
-        { tag: "mo", stunde: 15, isToggled: false },
-        { tag: "mo", stunde: 16, isToggled: false },
-        { tag: "mo", stunde: 17, isToggled: false },
-        { tag: "mo", stunde: 18, isToggled: false },
-        { tag: "mo", stunde: 19, isToggled: false },
+      user: {
+        montag: [
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false }
+        ],
+        dienstag: [
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false }
+        ],
+        mittwoch: [
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false }
+        ],
+        donnerstag: [
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false }
+        ],
+        freitag: [
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false },
+          { selected: false }
+        ],
 
-        { tag: "di", stunde: 8, isToggled: false },
-        { tag: "di", stunde: 9, isToggled: false },
-        { tag: "di", stunde: 10, isToggled: false },
-        { tag: "di", stunde: 11, isToggled: false },
-        { tag: "di", stunde: 12, isToggled: false },
-        { tag: "di", stunde: 13, isToggled: false },
-        { tag: "di", stunde: 14, isToggled: false },
-        { tag: "di", stunde: 15, isToggled: false },
-        { tag: "di", stunde: 16, isToggled: false },
-        { tag: "di", stunde: 17, isToggled: false },
-        { tag: "di", stunde: 18, isToggled: false },
-        { tag: "di", stunde: 19, isToggled: false },
+        parkPrefs: [
+          { pref: 0 },
+          { pref: 1 },
+          { pref: 2 },
+          { pref: 3 },
+          { pref: 4 }
+        ],
 
-        { tag: "mi", stunde: 8, isToggled: false },
-        { tag: "mi", stunde: 9, isToggled: false },
-        { tag: "mi", stunde: 10, isToggled: false },
-        { tag: "mi", stunde: 11, isToggled: false },
-        { tag: "mi", stunde: 12, isToggled: false },
-        { tag: "mi", stunde: 13, isToggled: false },
-        { tag: "mi", stunde: 14, isToggled: false },
-        { tag: "mi", stunde: 15, isToggled: false },
-        { tag: "mi", stunde: 16, isToggled: false },
-        { tag: "mi", stunde: 17, isToggled: false },
-        { tag: "mi", stunde: 18, isToggled: false },
-        { tag: "mi", stunde: 19, isToggled: false },
-
-        { tag: "do", stunde: 8, isToggled: false },
-        { tag: "do", stunde: 9, isToggled: false },
-        { tag: "do", stunde: 10, isToggled: false },
-        { tag: "do", stunde: 11, isToggled: false },
-        { tag: "do", stunde: 12, isToggled: false },
-        { tag: "do", stunde: 13, isToggled: false },
-        { tag: "do", stunde: 14, isToggled: false },
-        { tag: "do", stunde: 15, isToggled: false },
-        { tag: "do", stunde: 16, isToggled: false },
-        { tag: "do", stunde: 17, isToggled: false },
-        { tag: "do", stunde: 18, isToggled: false },
-        { tag: "do", stunde: 19, isToggled: false },
-
-        { tag: "fr", stunde: 8, isToggled: false },
-        { tag: "fr", stunde: 9, isToggled: false },
-        { tag: "fr", stunde: 10, isToggled: false },
-        { tag: "fr", stunde: 11, isToggled: false },
-        { tag: "fr", stunde: 12, isToggled: false },
-        { tag: "fr", stunde: 13, isToggled: false },
-        { tag: "fr", stunde: 14, isToggled: false },
-        { tag: "fr", stunde: 15, isToggled: false },
-        { tag: "fr", stunde: 16, isToggled: false },
-        { tag: "fr", stunde: 17, isToggled: false },
-        { tag: "fr", stunde: 18, isToggled: false },
-        { tag: "fr", stunde: 19, isToggled: false }
-      ],
-
-      parkPrefs: [
-        { tag: "mo", pref: "Parkplatzpräferenz" },
-        { tag: "di", pref: "Parkplatzpräferenz" },
-        { tag: "mi", pref: "Parkplatzpräferenz" },
-        { tag: "do", pref: "Parkplatzpräferenz" },
-        { tag: "fr", pref: "Parkplatzpräferenz" }
-      ],
-
-      flagsAllowed: 40,
-      currentYear: "",
-      currentWeek: "",
-      matnr: "",
-      parkwert: ""
+        flagsAllowed: 40,
+        matnr: "",
+        parkwert: ""
+      },
+      isLoading: false
     };
-
-    this.handleToggleFlag = this.handleToggleFlag.bind(this);
-    this.handleSelectParkPref = this.handleSelectParkPref.bind(this);
-  }
-  /**
-   * Diese Funktion dient zum an und austoggeln der
-   * Flags im state dieser Klasse
-   *
-   * @param {string} t
-   * Der Tag in dem Die Flag getoggled werden soll
-   * @param {integer} s
-   * Die Stunde in der die Flag getoggled werden soll
-   * @public
-   */
-  handleToggleFlag(t, s) {
-    this.setState(currentState => {
-      const modifiedFlag = currentState.flags
-        .filter(flag => flag.tag === t && flag.stunde === s)
-        .map(flag => {
-          flag.isToggled
-            ? currentState.flagsAllowed++
-            : currentState.flagsAllowed--;
-          flag.isToggled = !flag.isToggled;
-        });
-
-      return {
-        modifiedFlag
-      };
-    });
   }
 
-  /**
-   * Diese Funktion dient zum Wählen der Parkplatzpräferenz,
-   * welche im state dieser Klasse gespeichert wird
-   * @param {string} t
-   * Der Tag für den die Präferenz gewählt werden soll.
-   * @param {string} p
-   *
-   */
-  handleSelectParkPref(t, p) {
-    this.setState(currentState => {
-      const modifiedPref = currentState.parkPrefs
-        .filter(currPref => currPref.tag === t)
-        .map(currPref => (currPref.pref = p));
-
-      return {
-        modifiedPref
-      };
-    });
-  }
-
-  /**
-   * Hilfsfunktion um für die States die aktuelle Woche
-   * und das aktuelle Jahr zu bekommen (nicht selbst geschrieben)
-   */
-  getWeekAndYear(d) {
-    // Copy date so don't modify original
-    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-    // Set to nearest Thursday: current date + 4 - current day number
-    // Make Sunday's day number 7
-    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-    // Get first day of year
-    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    // Calculate full weeks to nearest Thursday
-    var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-    // Return array of year and week number
-    return [weekNo, d.getUTCFullYear()];
-  }
-
+  //Nachdem Komponente geladen ist, hol daten aus der DB
   componentDidMount() {
-    const weekAndYear = this.getWeekAndYear(new Date());
-
-    this.setState({
-      currentWeek: weekAndYear[0],
-      currentYear: weekAndYear[1]
-    });
+    this.setState({ isLoading: true });
+    fetch(API + QUERY)
+      .then(res => res.json())
+      .then(data => this.setState({ user: data, isLoading: false }))
+      .catch(e => console.log(e));
   }
 
   render() {
+    //Scope User von this.state raus
+    let { user } = this.state;
+
+    //CSS für Stundenplan Komponente
+    const styles = reactCSS({
+      default: {
+        stundenplan: {
+          width: "100vw" //breite des Stundenplans - 1vw = 1% Viewport width
+        },
+        schrift: {}
+      }
+    });
+
     return (
       <div>
-        <div align="center">
-          <p>Erlaubte Reservierungen: {this.state.flagsAllowed}</p>
-        </div>
-
-        <Tabelle
-          flags={this.state.flags}
-          handleToggleFlag={this.handleToggleFlag}
-          parkPrefs={this.state.parkPrefs}
-          handleSelectParkPref={this.handleSelectParkPref}
-          flagsAllowed={this.state.flagsAllowed}
-        />
-
-        <div className="SaveFoot">
-          <Benachrichtigung />
-        </div>
+        <h4>
+          {user.name} {user.nachname} Parkwert: {user.parkwert}
+        </h4>
+        {this.state.isLoading ? (
+          <Spinner animation="border" variant="dark" />
+        ) : (
+          <div style={styles.stundenplan}>
+            {" "}
+            <Tabelle user={user} />
+          </div>
+        )}{" "}
       </div>
     );
   }
@@ -413,44 +280,23 @@ class Stundenplan extends Component {
 
 export default Stundenplan;
 
-class Benachrichtigung extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false
-    };
-  }
+// const USER_DATA = {              // könnten daten aus einer JSON sein oder DB sein
+//   name: 'Timur Aktas',
+//   img: 'bild.img',
+//   username: 'timuruserName'
+// }
 
-  render() {
-    const { show } = this.state;
-    const handleShow = () => this.setState({ show: true });
-    const handleClose = () => this.setState({ show: false });
-    return (
-      <Row>
-        <Col xs={2}>
-          <Button
-            style={{ width: "150px", background: "green", border: "green" }}
-            onClick={handleShow}
-          >
-            Speichern
-          </Button>
-        </Col>
-        <Col xs={10}>
-          <Toast
-            style={{ float: "right", width: "300px" }}
-            onClose={handleClose}
-            show={show}
-            delay={3000}
-            autohide
-          >
-            <Toast.Header>
-              <strong className="mr-auto">Präferenz speichern</strong>
-              <small>Schließen</small>
-            </Toast.Header>
-            <Toast.Body>Erfolgreich gespeichert!</Toast.Body>
-          </Toast>
-        </Col>
-      </Row>
-    );
-  }
-}
+// function Badge(){
+//   return(
+//       <div>
+//       <img src={props.user.img} />                    // user.foo weil unten user=USER_DATA gesetzt wird
+//       <h1> Name: {props.user.name}</h1>
+//       <h3> username: {props.user.username} </h3>
+//       </div>
+//   )
+// }
+
+// reactDOM.render(
+//   <Badge user={USER_DATA} />      //funktion aufrufen mit daten
+//   document.getElementById('app')
+// )

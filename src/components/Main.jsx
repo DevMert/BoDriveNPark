@@ -1,20 +1,40 @@
 import React, { Component } from "react";
+import { Security, SecureRoute, ImplicitCallback } from "@okta/okta-react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Stundenplan from "./Praeferenzen/Stundenplan";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import Reservierung from "./Reservierung/Reservierung";
 import Experimental from "./experimental/Experimental";
 import Karte from "./Karte/Karte";
+import Login from "./Login/Login";
+
+function onAuthRequired({ history }) {
+  history.push("/login");
+}
 
 export default class Main extends Component {
   render() {
     return (
       <div>
         <Router>
-          <Route path="/praeferenzplanung" component={Stundenplan} />
-          <Route path="/reservierung" component={Reservierung} />
-          <Route path="/map" component={Karte} />
-          <Route path="/experimental" component={Experimental} />
+          <Security
+            issuer="https://dev-807143.oktapreview.com/oauth2/default"
+            client_id="0oald1a5nwPHcFgbs0h7"
+            redirect_uri={window.location.origin + "/implicit/callback"}
+            onAuthRequired={onAuthRequired}
+          >
+            <SecureRoute path="/praeferenzplanung" component={Stundenplan} />
+            <SecureRoute path="/reservierung" component={Reservierung} />
+            <SecureRoute path="/map" component={Karte} />
+            <SecureRoute path="/experimental" component={Experimental} />
+            <Route
+              path="/login"
+              render={() => (
+                <Login baseUrl="https://dev-807143.oktapreview.com" />
+              )}
+            />
+            <Route path="/implicit/callback" component={ImplicitCallback} />
+          </Security>
         </Router>
       </div>
     );

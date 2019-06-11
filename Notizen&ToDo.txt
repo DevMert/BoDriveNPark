@@ -1,0 +1,20 @@
+1. Login seite erstellen
+2. User loggt sich ein -> Daten aus DB fetchen mit [matrNr]
+3. Stundenplan erstellen, welchher auf Speichern die Daten zur DB schickt -> Wenn user schon existiert -> Update
+4. Dashboard erstellen -> Ziehe Daten aus der DB und zeige an welchen Parkplatz habe ich für diese Tage**
+
+
+
+
+** Algorithmus schreiben
+- Es gibt 10 Hauptparkplätze
+- Es gibt 7 Nebenparkplätze	<-- PRO TAG VERSTEHT SICH!!! 
+- Es gibt 4 Andere Parkplätze 
+
+- Starte -> Montag 
+	Ordne User neu nach Punkten ( Je höher die Punktezahl desto höher die Prio)
+	Verteile von oben nach unten die Parkplätze
+	die ersten 5 User bekommen -5 Punkte abzug
+	die letzten 5 User bekommen +2 Punkte
+	falls jemand keinen Parkplatz hat bekommt er +5 Punkte
+Für jeden Tag wiederholenn!! 
