@@ -9,45 +9,73 @@ const CONNECTION_URL =
 const DATABASE_NAME = "BoDB";
 
 var app = Express();
-var database, collection;
+var database, collection, parkplatz;
 
 //verändert ankommende Daten zur json sonst würde man nur raw data bekommen
-app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
+app.use(BodyParser.json());
 
-//erlaube dem Client daten aus der DB zu nehmen
+//Erlaube dem Client Daten aus der DB zu nehmen..
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
 });
 
+//In die Collection parkplatz schreiben..
+app.post("/parkplatz", (req, res) => {
+  parkplatz.insertOne(req.body, (error, result) => {
+    if (error) {
+      return res.status(500).send(error);
+    }
+    console.log(req.body);
+    res.send(result.result);
+    console.log("Erfolgreich in die DB geschrieben");
+  });
+});
+
 //In die DB users schreiben..
-app.post("/users/:matrNr", (req, res) => {
+app.post("/users", (req, res) => {
   collection.insertOne(req.body, (error, result) => {
     if (error) {
       return res.status(500).send(error);
     }
+    console.log(req.body);
     res.send(result.result);
-    console.log("Erfolgreich in dxie DB geschrieben");
+    console.log("Erfolgreich in die DB geschrieben");
   });
 });
 
-//Update den User in der DB mit matrNr
+//Update User/matrikelNummer..
 app.put("/users/:matrNr", (req, res) => {
-  collection.insertOne(req.body, (error, result) => {
-    if (error) {
-      return res.status(500).send(error);
+  collection.update(
+    {
+      matrNr: req.params.matrNr // suche den User mit der matrNr
+    },
+    {
+      $set: {
+        montag: req.body.montag,
+        dienstag: req.body.dienstag,
+        mittwoch: req.body.mittwoch,
+        donnerstag: req.body.donnerstag,
+        freitag: req.body.freitag
+      }
+    },
+    { multi: true },
+    function(err, res) {
+      if (err) res.send(err);
+      else {
+        console.log("user updated!", res);
+      }
     }
-    res.send(result.result);
-    console.log("Erfolgreich in dxie DB geschrieben");
-  });
+  );
 });
 
-//Hol alle User aus der DB
+//Hol alle User aus der DB..
 app.get("/users", (req, res) => {
   collection.find({}).toArray((error, result) => {
     if (error) {
@@ -58,12 +86,13 @@ app.get("/users", (req, res) => {
   });
 });
 
-//Scope einen User aus der DB mit matrNr parameter
+//Scope einen User aus der DB mit matrNr parameter..
 app.get("/users/:matrNr", (req, res) => {
   collection.findOne({ matrNr: req.params.matrNr }, (error, result) => {
     if (error) {
       return res.status(500).send(error);
     }
+
     res.send(result);
   });
 });
@@ -79,6 +108,7 @@ app.listen(8080, () => {
       }
       database = client.db(DATABASE_NAME);
       collection = database.collection("users");
+      parkplatz = database.collection("parkplatz");
       console.log("Connected to `" + DATABASE_NAME + "`!");
     }
   );

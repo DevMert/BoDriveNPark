@@ -19,6 +19,8 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-toastify": "^5.2.1",
+    "react-toastr": "^3.0.0",
     "reactcss": "^1.2.3",
     "styled-components": "^4.2.0"
   },
@@ -42,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
