@@ -97,6 +97,17 @@ app.get("/users/:matrNr", (req, res) => {
   });
 });
 
+//Scope einen User aus der DB mit matrNr parameter.. für Reservierung
+app.get("/parkplatz/:matrNr", (req, res) => {
+  parkplatz.findOne({ matrNr: req.params.matrNr }, (error, result) => {
+    if (error) {
+      return res.status(500).send(error);
+    }
+
+    res.send(result);
+  });
+});
+
 //Starte den Server auf PORT 8080 und verbinde mit der Datenbank
 app.listen(8080, () => {
   MongoClient.connect(
