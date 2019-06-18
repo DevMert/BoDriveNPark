@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Image from 'react-bootstrap/Image';
 
 class Karte extends Component {
   render() {
-    return <div>Hier ist die Karte</div>;
+    return <div />;
   }
 }
 
