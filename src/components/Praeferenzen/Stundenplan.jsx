@@ -308,6 +308,7 @@ class Stundenplan extends Component {
   //Nachdem Komponente geladen ist, hol daten aus der DB
   componentWillUnmount() {}
 
+  //wenn komponente geladen ist mach folgendes..
   componentDidMount() {
     this.setState({ isLoading: true });
     fetch(API + QUERY)
@@ -316,31 +317,7 @@ class Stundenplan extends Component {
       .catch(e => console.log(e));
   }
 
-  // handleToggleFlag(t, s) {
-  //   this.setState(currentState => {
-  //     const modifiedFlag = currentState.flags
-  //       .filter(flag => flag.tag === t && flag.stunde === s)
-  //       .map(flag => (flag.isToggled = !flag.isToggled));
-
-  //     return {
-  //       modifiedFlag
-  //     };
-  //   });
-  // }
-  handleParkPref = (tag, platz) => {
-    console.log("Hello WOrld");
-    console.log(tag, platz);
-    // this.setState(currentState => {
-    //   const modifiedPref = currentState.parkPrefs
-    //     .filter(currPref => currPref.tag === t)
-    //     .map(currPref => (currPref.pref = p));
-
-    //   return {
-    //     modifiedPref
-    //   };
-    // });
-  };
-
+  //Wenn im Stundenplan etwas geklickt wird, ändert er den state ab..
   handleClick = (tag, std) => {
     let reverse;
     switch (tag) {
@@ -381,7 +358,7 @@ class Stundenplan extends Component {
         break;
     }
   };
-
+  //Updatet User in die DB..
   writeToDB = () => {
     let user = this.state.user;
     console.log(user);
@@ -406,6 +383,7 @@ class Stundenplan extends Component {
     );
   };
 
+  //Startet den Algorithmus..
   startAlgo = () => {
     var wait = 10000;
     toast("Algorithmus wurde gestartet!");
