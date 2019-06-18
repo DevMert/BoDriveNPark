@@ -317,6 +317,11 @@ class Stundenplan extends Component {
       .catch(e => console.log(e));
   }
 
+  handleParkPref = (tag, platz) => {
+    console.log("Hello WOrld");
+    console.log(tag, platz);
+  };
+
   //Wenn im Stundenplan etwas geklickt wird, ändert er den state ab..
   handleClick = (tag, std) => {
     let reverse;
