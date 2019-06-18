@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import reactCSS from "reactcss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//React Bootstrap
+import { Dropdown } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Toast from "react-bootstrap/Toast";
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
+import Form from "react-bootstrap/Form";
 
 //DB API
 const API = "http://localhost:8080/";
@@ -30,18 +38,14 @@ class TableRow extends Component {
         }
       }
     });
-    const { stunde, user, counter } = this.props;
-
-    const setCellState = (user, counter) => {
-      const list = user.map((item, j) => {});
-    };
+    const { stunde, user, counter, handleClick } = this.props;
 
     return (
       <tr>
         <td>
           {stunde}-{stunde + 1}
         </td>
-        <td onClick={() => setCellState(user.montag, counter)}>
+        <td onClick={() => handleClick("montag", counter)}>
           <div>
             {user.montag[counter].selected ? (
               <div style={styles.container}>
@@ -50,7 +54,7 @@ class TableRow extends Component {
             ) : null}
           </div>
         </td>
-        <td>
+        <td onClick={() => handleClick("dienstag", counter)}>
           <div>
             {user.dienstag[counter].selected ? (
               <div style={styles.container}>
@@ -59,7 +63,7 @@ class TableRow extends Component {
             ) : null}
           </div>
         </td>
-        <td>
+        <td onClick={() => handleClick("mittwoch", counter)}>
           <div>
             {user.mittwoch[counter].selected ? (
               <div style={styles.container}>
@@ -68,7 +72,7 @@ class TableRow extends Component {
             ) : null}
           </div>
         </td>
-        <td>
+        <td onClick={() => handleClick("donnerstag", counter)}>
           <div>
             {user.donnerstag[counter].selected ? (
               <div style={styles.container}>
@@ -77,7 +81,7 @@ class TableRow extends Component {
             ) : null}
           </div>
         </td>
-        <td>
+        <td onClick={() => handleClick("freitag", counter)}>
           <div>
             {user.freitag[counter].selected ? (
               <div style={styles.container}>
@@ -90,10 +94,50 @@ class TableRow extends Component {
     );
   }
 }
+class ParkplatzDropdown extends Component {
+  render() {
+    const {
+      handleParkPref,
+      parkPrefs: { tag, pref }
+    } = this.props;
+
+    return (
+      <Dropdown>
+        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          {pref}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onSelect={() => handleParkPref(tag, "Eingangsparkplatz")}
+          >
+            Eingangsparkplatz
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={() => handleParkPref(tag, "RUB-Parkplatz")}>
+            RUB-Parkplatz
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={() => handleParkPref(tag, "Hauptparkplatz")}>
+            Hauptparkplatz
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={() => handleParkPref(tag, "E-Parkplatz")}>
+            E-Parkplatz
+          </Dropdown.Item>
+          <Dropdown.Item
+            onSelect={() => handleParkPref(tag, "Alle HS-parkplätze")}
+          >
+            <b>Alle HS-parkplätze</b>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
+}
+
 class Tabelle extends Component {
   render() {
-    const { user } = this.props;
+    const { user, handleClick, handleParkPref } = this.props;
     const tableRow = [];
+    const parkplatzDropdowns = [];
 
     // Stundenplan header bereich
     const thead = (
@@ -119,12 +163,37 @@ class Tabelle extends Component {
       </thead>
     );
 
-    const tbody = <tbody>{tableRow}</tbody>;
+    const tbody = (
+      <tbody>
+        {tableRow}
+        <tr>
+          <th scope="row">Parkplatz</th>
+          {parkplatzDropdowns}
+        </tr>
+      </tbody>
+    );
+
+    for (var j = 0; j <= 4; j++) {
+      parkplatzDropdowns.push(
+        <td key={j}>
+          <ParkplatzDropdown
+            parkPrefs={user.parkPrefs[j]}
+            handleParkPref={this.props.handleParkPref}
+          />
+        </td>
+      );
+    }
 
     //Generiert für jeden tag die Zellen
     for (let i = 8; i <= 17; i++) {
       tableRow.push(
-        <TableRow key={i} stunde={i} user={user} counter={i - 8} />
+        <TableRow
+          key={i}
+          stunde={i}
+          user={user}
+          counter={i - 8}
+          handleClick={handleClick}
+        />
       );
       // key: jede zelle muss ein unique key haben
       // stunde: links im Plan die Stunden anzeigen
@@ -207,7 +276,7 @@ class Stundenplan extends Component {
           { selected: false }
         ],
         freitag: [
-          { selected: false },
+          { std: 0, selected: false },
           { selected: false },
           { selected: false },
           { selected: false },
@@ -222,22 +291,24 @@ class Stundenplan extends Component {
         ],
 
         parkPrefs: [
-          { pref: 0 },
-          { pref: 1 },
-          { pref: 2 },
-          { pref: 3 },
-          { pref: 4 }
+          { tag: "mo", pref: "" },
+          { tag: "di", pref: "" },
+          { tag: "mi", pref: "" },
+          { tag: "do", pref: "" },
+          { tag: "fr", pref: "" }
         ],
 
-        flagsAllowed: 40,
-        matnr: "",
-        parkwert: ""
+        limit: 40,
+        matNr: 0,
+        parkwert: 0
       },
       isLoading: false
     };
   }
 
   //Nachdem Komponente geladen ist, hol daten aus der DB
+  componentWillUnmount() {}
+
   componentDidMount() {
     this.setState({ isLoading: true });
     fetch(API + QUERY)
@@ -246,31 +317,141 @@ class Stundenplan extends Component {
       .catch(e => console.log(e));
   }
 
+  // handleToggleFlag(t, s) {
+  //   this.setState(currentState => {
+  //     const modifiedFlag = currentState.flags
+  //       .filter(flag => flag.tag === t && flag.stunde === s)
+  //       .map(flag => (flag.isToggled = !flag.isToggled));
+
+  //     return {
+  //       modifiedFlag
+  //     };
+  //   });
+  // }
+  handleParkPref = (tag, platz) => {
+    console.log("Hello WOrld");
+    console.log(tag, platz);
+    // this.setState(currentState => {
+    //   const modifiedPref = currentState.parkPrefs
+    //     .filter(currPref => currPref.tag === t)
+    //     .map(currPref => (currPref.pref = p));
+
+    //   return {
+    //     modifiedPref
+    //   };
+    // });
+  };
+
+  handleClick = (tag, std) => {
+    let reverse;
+    switch (tag) {
+      case "montag":
+        let mo = this.state.user.montag; // Tag aus this.state
+        reverse = !this.state.user.montag[std].selected; //True/false wechseln
+        mo[std].selected = reverse; //Wechsel den status der Zelle
+
+        this.setState({ montag: mo });
+        break;
+      case "dienstag":
+        let di = this.state.user.dienstag;
+        reverse = !this.state.user.dienstag[std].selected;
+
+        di[std].selected = reverse;
+        this.setState({ dienstag: di });
+        break;
+      case "mittwoch":
+        let mi = this.state.user.mittwoch;
+        reverse = !this.state.user.mittwoch[std].selected;
+
+        mi[std].selected = reverse;
+        this.setState({ mittwoch: mi });
+        break;
+      case "donnerstag":
+        let donn = this.state.user.donnerstag;
+        reverse = !this.state.user.donnerstag[std].selected;
+
+        donn[std].selected = reverse;
+        this.setState({ donnerstag: donn });
+        break;
+      case "freitag":
+        let fr = this.state.user.freitag;
+        reverse = !this.state.user.freitag[std].selected;
+
+        fr[std].selected = reverse;
+        this.setState({ freitag: fr });
+        break;
+    }
+  };
+
+  writeToDB = () => {
+    let user = this.state.user;
+    console.log(user);
+
+    fetch(API + QUERY, {
+      method: "PUT",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => console.log("Success:", JSON.stringify(response)));
+
+    //Toast Notification
+    toast(
+      this.state.user.name +
+        " " +
+        this.state.user.nachname +
+        " erfolgreich geupdatet!"
+    );
+  };
+
   render() {
     //Scope User von this.state raus
     let { user } = this.state;
-
+    let container;
     //CSS für Stundenplan Komponente
     const styles = reactCSS({
       default: {
         stundenplan: {
           width: "100vw" //breite des Stundenplans - 1vw = 1% Viewport width
         },
-        schrift: {}
+        schrift: {},
+        spinner: {
+          position: "fixed" /* or absolute */,
+          top: "50%",
+          left: "50%"
+        }
       }
     });
-
+    console.log(this.state);
     return (
       <div>
-        <h4>
-          {user.name} {user.nachname} Parkwert: {user.parkwert}
-        </h4>
         {this.state.isLoading ? (
-          <Spinner animation="border" variant="dark" />
+          <div style={styles.spinner}>
+            {" "}
+            <Spinner animation="border" variant="dark" />
+          </div>
         ) : (
           <div style={styles.stundenplan}>
-            {" "}
-            <Tabelle user={user} />
+            <h4>
+              {user.name} {user.nachname} Parkwert: {user.parkwert}
+            </h4>{" "}
+            <Tabelle
+              user={this.state.user}
+              handleClick={this.handleClick}
+              handleParkPref={this.handleParkPref}
+            />
+            <div className="SaveFoot">
+              <Button variant="success" onClick={() => this.writeToDB()}>
+                Speichern
+              </Button>
+              <Button variant="primary">Start Algo</Button>
+            </div>
+            <div>
+              <ToastContainer />
+            </div>
           </div>
         )}{" "}
       </div>
