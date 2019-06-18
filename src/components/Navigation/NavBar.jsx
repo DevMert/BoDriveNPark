@@ -10,7 +10,6 @@ export default function NavBar() {
           <Nav.Link href="/praeferenzplanung">Präferenz</Nav.Link>
           <Nav.Link href="/reservierung">Reservierung</Nav.Link>
           <Nav.Link href="/map">Map</Nav.Link>
-          <Nav.Link href="/experimental">Experimental</Nav.Link>
         </Nav>
       </Navbar>
     </div>

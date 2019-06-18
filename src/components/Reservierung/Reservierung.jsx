@@ -51,7 +51,6 @@ export default class Reservierung extends Component {
 
     return (
       <div>
-        <h1>{user.matrNr}</h1>
         <CardDeck className="cDeck1">
           <Card>
             <Card.Header as="h5">Montag</Card.Header>

@@ -22,13 +22,12 @@ class TableRow extends Component {
     const styles = reactCSS({
       default: {
         container: {
-          height: "auto",
-          background: `green`
+          height: "auto"
         },
         text: {
           textAlign: "center",
           margin: "0",
-          color: "white",
+          color: "black",
           paddingTop: "10px",
           cursor: "default"
         },
@@ -407,6 +406,14 @@ class Stundenplan extends Component {
     );
   };
 
+  startAlgo = () => {
+    var wait = 10000;
+    toast("Algorithmus wurde gestartet!");
+    setTimeout(() => {
+      toast("Algorithmus erfolgreich durchgelaufen!");
+    }, wait);
+  };
+
   render() {
     //Scope User von this.state raus
     let { user } = this.state;
@@ -422,6 +429,13 @@ class Stundenplan extends Component {
           position: "fixed" /* or absolute */,
           top: "50%",
           left: "50%"
+        },
+        h4: {
+          textAlign: "center",
+          margin: "10px"
+        },
+        footSaver: {
+          position: "center"
         }
       }
     });
@@ -435,19 +449,22 @@ class Stundenplan extends Component {
           </div>
         ) : (
           <div style={styles.stundenplan}>
-            <h4>
-              {user.name} {user.nachname} Parkwert: {user.parkwert}
+            <h4 style={styles.h4}>
+              <b>Matrikelnummer</b>: {user.matrNr} <b>Name</b>: {user.name}{" "}
+              {user.nachname}
             </h4>{" "}
             <Tabelle
               user={this.state.user}
               handleClick={this.handleClick}
               handleParkPref={this.handleParkPref}
             />
-            <div className="SaveFoot">
+            <div styles={styles.footSaver}>
               <Button variant="success" onClick={() => this.writeToDB()}>
                 Speichern
               </Button>
-              <Button variant="primary">Start Algo</Button>
+              <Button variant="primary" onClick={() => this.startAlgo()}>
+                Start Algo
+              </Button>
             </div>
             <div>
               <ToastContainer />
