@@ -17,7 +17,7 @@ Ordnerpfad auswählen: bsp. C:..\BoDrive> npm start
 
 ------------------------------------------------------------
 
-## Wer hat welche Code geschrieben?
+## Wer hat welchen Code geschrieben?
 #### Daniel Tura: 
 components/experimental/Algorithmus
 
@@ -26,3 +26,4 @@ components/Praeferenzen/Stundenplan (Nur in turasBranch)
 #### Timur Aktas:
 #### Selim Duman:
 #### Mert Yalovac:
+#### Moritz Darge:
