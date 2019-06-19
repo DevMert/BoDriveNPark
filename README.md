@@ -14,3 +14,14 @@ server.js Dateipfad auswählen: bsp.  C:..\BoDrive\server> node server.js
 
 ### MongoDB Client starten 
 Ordnerpfad auswählen: bsp. C:..\BoDrive> npm start
+
+------------------------------------------------------------
+
+## Wer hat welche Code geschrieben?
+#### Daniel Tura: 
+components/experimental/Algorithmus
+components/Praeferenzen/Stundenplan (Nur in turasBranch)
+
+#### Timur Aktas:
+#### Selim Duman:
+#### Mert Yalovac:
