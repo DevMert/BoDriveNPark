@@ -27,6 +27,9 @@ components/Praeferenzen/Stundenplan (Nur in turasBranch)
 #### Selim Duman:
 #### Mert Yalovac:
 components/Reservierung
+
 server/server.js (Zum Teil)
+
 MongoDB (Zum Teil)
+
 #### Moritz Darge:
