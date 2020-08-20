@@ -5,7 +5,7 @@
   "dependencies": {
     "@okta/okta-react": "^1.2.0",
     "@okta/okta-signin-widget": "^2.20.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-arrow-buttons": "^1.0.4",
